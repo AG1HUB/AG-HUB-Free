@@ -16,7 +16,7 @@ $hostname = gethostbyaddr($_SERVER['REMOTE_ADDR']);
 $fh = fopen('logs.txt', 'a'); 
 fwrite($fh, ''."".$ip ."\n");
 $keys = array(
-"AG-Hub-Free-Key123"
+"AG-Hub-FreeKey"
 ); 
 $sub = $_GET["key"];
 if (in_array($sub,$keys,TRUE)) {

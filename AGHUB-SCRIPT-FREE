@@ -1,9 +1,0 @@
-if game.PlaceId == 2753915549 or 4442272183 then
-
-loadstring(game:HttpGet("https://raw.githubusercontent.com/AG1HUB/AG-HUB-Free/main/BLOXFRUITS-FREE"))()
-
-else
-
-game.Players.LocalPlayer:Kick("script not support this game")
-
-end

@@ -1,0 +1,2365 @@
+
+if game.PlaceId == 2753915549 then
+
+
+    local DiscordLib = loadstring(game:HttpGet"https://raw.githubusercontent.com/dawid-scripts/UI-Libs/main/discord%20lib.txt")()
+    game.Players.LocalPlayer.Character.Movement.Disabled = true
+    local win = DiscordLib:Window("AG HUB Paid - Blox Fruits")
+    
+    local serv = win:Server("Main", "")
+    
+    local tgls = serv:Channel("AutoFarm")
+    
+    local LocalPlay = game:GetService("Players").LocalPlayer
+		local Mouse = LocalPlay:GetMouse()
+		Mouse.Button1Down:connect(
+			function()
+				if not game:GetService("UserInputService"):IsKeyDown(Enum.KeyCode.LeftControl) then
+					return
+				end
+				if not Mouse.Target then
+					return
+				end
+				if CTRL then
+					Plr.Character:MoveTo(Mouse.Hit.p)
+				end
+			end)
+
+Playname = {}
+		for i,v in pairs(game.Players:GetChildren()) do  
+			table.insert(Playname ,v.Name)
+		end
+		SelectedKillPlayer = ""
+		local Player = tgls:Dropdown("SelectedPlayer",Playname,function(SL)
+			SelectedKillPlayer = SL
+		end)
+		tgls:Toggle("KillPlayer(combat)",false,function(vu)
+			KillPlayer = vu
+			if KillPlayer == false then
+				game.Players:FindFirstChild(SelectedKillPlayer).Character.HumanoidRootPart.Size = Vector3.new(1, 1, 1)
+			end
+			local args = {
+				[1] = "Buso"
+			}
+			game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+
+
+			while KillPlayer do wait()
+			    game.Players.LocalPlayer.Character.Humanoid:ChangeState(11)
+                sethiddenproperty(game.Players.LocalPlayer, "SimulationRadius", math.huge)
+				game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Players:FindFirstChild(SelectedKillPlayer).Character.HumanoidRootPart.CFrame * CFrame.new(0,-10,0)
+				game.Players:FindFirstChild(SelectedKillPlayer).Character.HumanoidRootPart.Size = Vector3.new(60,60,60)
+				game:GetService'VirtualUser':CaptureController()
+				game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
+			end
+		end)
+
+-- Wapon
+Weapon = {}
+		for i,v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do  
+			if v:IsA("Tool") then
+				table.insert(Weapon ,v.Name)
+			end
+		end
+		for i,v in pairs(game.Players.LocalPlayer.Character:GetChildren()) do  
+			if v:IsA("Tool") then
+				table.insert(Weapon, v.Name)
+			end
+		end
+		-- SelectToolWeapon
+		SelectWeapon = ""
+		function EquipWeapon(Tool)
+			if game.Players.LocalPlayer.Backpack:FindFirstChild(Tool) then
+				local tool = game.Players.LocalPlayer.Backpack:FindFirstChild(Tool)
+				wait(.4)
+				game.Players.LocalPlayer.Character.Humanoid:EquipTool(tool)
+			end
+		end
+		
+		local SLWP = serv:Channel("AutoWeapon")
+		-- addDropdown
+local Drop = SLWP:Dropdown("SelectWeapon",Weapon,function(vu)
+			SelectWeapon = vu
+end)
+	SLWP:Button("RefreshWeapon", function(vu)
+	    Refresh = vu
+	    if Refresh then
+Drop:Clear() 
+else 
+    SelectWeapon = vu
+    
+
+
+end
+end)
+
+    function Quest()
+        local MyLevel = game:GetService("Players").LocalPlayer.Data.Level.Value
+        if MyLevel == 1 or MyLevel <= 9 then -- Bandit
+                NAMEMON = "Bandit [Lv. 5]"
+                NAMEQUEST = "BanditQuest1"
+                NUMBERQUEST = 1
+                CFQUEST = CFrame.new(1061.66699, 16.5166187, 1544.52905, -0.942978859, -3.33851502e-09, 0.332852632, 7.04340497e-09, 1, 2.99841325e-08, -0.332852632, 3.06188177e-08, -0.942978859)
+                CFPUK = CFrame.new(1221.0729980469, 57.390892028809, 1519.5075683594)
+                CFM = CFrame.new(1166.5871582031, 16.340866088867, 1677.4910888672)
+            elseif MyLevel == 10 or MyLevel <= 14 then -- Monkey
+                NAMEMON = "Monkey [Lv. 14]"
+                NAMEQUEST = "JungleQuest"
+                NUMBERQUEST = 1
+                CFQUEST = CFrame.new(-1604.12012, 36.8521118, 154.23732, 0.0648873374, -4.70858913e-06, -0.997892559, 1.41431883e-07, 1, -4.70933674e-06, 0.997892559, 1.64442184e-07, 0.0648873374)
+                CFPUK = CFrame.new(-1774.37109375, 60.860008239746, 46.497032165527)
+                CFM = CFrame.new(-1785.7883300781, 22.852085113525, 1.5498087406158)
+            elseif MyLevel == 15 or MyLevel <= 29 then -- Gorilla
+                CFM = CFrame.new(-1789.5676269531, 22.852085113525, -46.558128356934)
+                NAMEMON = "Gorilla [Lv. 20]"
+                NAMEQUEST = "JungleQuest"
+                NUMBERQUEST = 2
+                CFQUEST = CFrame.new(-1604.12012, 36.8521118, 154.23732, 0.0648873374, -4.70858913e-06, -0.997892559, 1.41431883e-07, 1, -4.70933674e-06, 0.997892559, 1.64442184e-07, 0.0648873374)
+                CFPUK = CFrame.new(-1133.3891601563, 54.097164154053, -520.93103027344)
+                CFM = CFrame.new(-1234.5366210938, 6.279363155365, -544.36016845703)
+            elseif MyLevel == 30 or MyLevel <= 39 then -- Pirate
+                NAMEMON = "Pirate [Lv. 35]"
+                NAMEQUEST = "BuggyQuest1"
+                NUMBERQUEST = 1
+                CFQUEST = CFrame.new(-1139.59717, 4.75205183, 3825.16211, -0.959730506, -7.5857054e-09, 0.280922383, -4.06310328e-08, 1, -1.11807175e-07, -0.280922383, -1.18718916e-07, -0.959730506)
+                CFPUK = CFrame.new(-1198.9635009766, 44.77783203125, 3831.6071777344)
+                CFM = CFrame.new(-1223.5007324219, 4.7520513534546, 3945.4704589844)
+            elseif MyLevel == 40 or MyLevel <= 59 then -- Brute
+                NAMEMON = "Brute [Lv. 45]"
+                NAMEQUEST = "BuggyQuest1"
+                NUMBERQUEST = 2
+                CFQUEST = CFrame.new(-1139.59717, 4.75205183, 3825.16211, -0.959730506, -7.5857054e-09, 0.280922383, -4.06310328e-08, 1, -1.11807175e-07, -0.280922383, -1.18718916e-07, -0.959730506)
+                CFPUK = CFrame.new(-1149.6790771484, 57.1875, 4176.8774414063)
+                CFM = CFrame.new(-1316.9389648438, 15.089872360229, 4323.5478515625)
+            elseif MyLevel == 60 or MyLevel <= 74 then -- Desert Bandit
+                NAMEMON = "Desert Bandit [Lv. 60]"
+                NAMEQUEST = "DesertQuest"
+                NUMBERQUEST = 1
+                CFQUEST = CFrame.new(897.031128, 6.43846416, 4388.97168, -0.804044724, 3.68233266e-08, 0.594568789, 6.97835176e-08, 1, 3.24365246e-08, -0.594568789, 6.75715199e-08, -0.804044724)
+                CFPUK = CFrame.new(805.94494628906, 20.94552230835, 4357.80078125)
+                CFM = CFrame.new(928.181640625, 6.4481287002563, 4475.3374023438)
+            elseif MyLevel == 75 or MyLevel <= 89 then -- Desert Officre
+                NAMEMON = "Desert Officer [Lv. 70]"
+                NAMEQUEST = "DesertQuest"
+                NUMBERQUEST = 2
+                CFQUEST = CFrame.new(897.031128, 6.43846416, 4388.97168, -0.804044724, 3.68233266e-08, 0.594568789, 6.97835176e-08, 1, 3.24365246e-08, -0.594568789, 6.75715199e-08, -0.804044724)
+                CFPUK = CFrame.new(1468.8266601563, 14.677843093872, 4407.4418945313)
+                CFM = CFrame.new(1643.4937744141, 1.210969209671, 4363.7998046875)
+            elseif MyLevel == 90 or MyLevel <= 99 then -- Snow Bandits
+                NAMEMON = "Snow Bandit [Lv. 90]"
+                NAMEQUEST = "SnowQuest"
+                NUMBERQUEST = 1
+                CFQUEST = CFrame.new(1384.14001, 87.272789, -1297.06482, 0.348555952, -2.53947841e-09, -0.937287986, 1.49860568e-08, 1, 2.86358204e-09, 0.937287986, -1.50443711e-08, 0.348555952)
+                CFPUK = CFrame.new(1414.6539306641, 86.937126159668, -1287.0657958984)
+                CFM = CFrame.new(1240.6696777344, 87.272766113281, -1348.1037597656)
+            elseif MyLevel == 100 or MyLevel <= 119 then -- Snowman
+                NAMEMON = "Snowman [Lv. 100]"
+                NAMEQUEST = "SnowQuest"
+                NUMBERQUEST = 2
+                CFQUEST = CFrame.new(1384.14001, 87.272789, -1297.06482, 0.348555952, -2.53947841e-09, -0.937287986, 1.49860568e-08, 1, 2.86358204e-09, 0.937287986, -1.50443711e-08, 0.348555952)
+                CFPUK = CFrame.new(1007.452331543, 133.08332824707, -1594.0411376953)
+                CFM = CFrame.new(1110.1461181641, 105.76805877686, -1618.0068359375)
+            elseif MyLevel == 120 or MyLevel <= 149 then -- Chief Petty Officer
+                NAMEMON = "Chief Petty Officer [Lv. 120]"
+                NAMEQUEST = "MarineQuest2"
+                NUMBERQUEST = 1
+                CFQUEST = CFrame.new(-5035.0835, 28.6520386, 4325.29443, 0.0243340395, -7.08064647e-08, 0.999703884, -6.36926814e-08, 1, 7.23777944e-08, -0.999703884, -6.54350671e-08, 0.0243340395)
+                CFPUK = CFrame.new(-4928.982421875, 157.81146240234, 4317.98046875)
+                CFM = CFrame.new(-4658.2138671875, 20.652032852173, 4425.458984375)
+            elseif MyLevel == 150 or MyLevel <= 174 then -- Sky Bandit
+                NAMEMON = "Sky Bandit [Lv. 150]"
+                NAMEQUEST = "SkyQuest"
+                NUMBERQUEST = 1
+                CFQUEST = CFrame.new(-4841.83447, 717.669617, -2623.96436, -0.875942111, 5.59710216e-08, -0.482416272, 3.04023082e-08, 1, 6.08195947e-08, 0.482416272, 3.86078725e-08, -0.875942111)
+                CFPUK = CFrame.new(-4930.1630859375, 345.59069824219, -3022.9479980469)
+                CFM = CFrame.new(-5017.8369140625, 278.06719970703, -2865.0737304688)
+            elseif MyLevel == 175 or MyLevel <= 224 then -- Dark Master
+                NAMEMON = "Dark Master [Lv. 175]"
+                NAMEQUEST = "SkyQuest"
+                NUMBERQUEST = 2
+                CFQUEST = CFrame.new(-4841.83447, 717.669617, -2623.96436, -0.875942111, 5.59710216e-08, -0.482416272, 3.04023082e-08, 1, 6.08195947e-08, 0.482416272, 3.86078725e-08, -0.875942111)
+                CFPUK = CFrame.new(-5172.0805664063, 500.80151367188, -2455.4348144531)
+                CFM = CFrame.new(-5237.7626953125, 388.65194702148, -2153.8889160156)
+            elseif MyLevel == 225 or MyLevel <= 274 then -- Toga Warrior
+                NAMEMON = "Toga Warrior [Lv. 225]"
+                NAMEQUEST = "ColosseumQuest"
+                NUMBERQUEST = 1
+                CFQUEST = CFrame.new(-1576.11743, 7.38933945, -2983.30762, 0.576966345, 1.22114863e-09, 0.816767931, -3.58496594e-10, 1, -1.24185606e-09, -0.816767931, 4.2370063e-10, 0.576966345)
+                CFPUK =CFrame.new(-1997.6246337891, 39.396636962891, -2884.7023925781)
+                CFM = CFrame.new(-1949.8349609375, 7.2890725135803, -2767.2380371094)
+            elseif MyLevel == 275 or MyLevel <= 299 then -- Gladiato
+                NAMEMON = "Gladiator [Lv. 275]"
+                NAMEQUEST = "ColosseumQuest"
+                NUMBERQUEST = 2
+                CFQUEST = CFrame.new(-1576.11743, 7.38933945, -2983.30762, 0.576966345, 1.22114863e-09, 0.816767931, -3.58496594e-10, 1, -1.24185606e-09, -0.816767931, 4.2370063e-10, 0.576966345)
+                CFPUK = CFrame.new(-1493.1932373047, 39.39603805542, -3326.3317871094)
+                CFM = CFrame.new(-1280.6323242188, 7.4425458908081, -3248.9389648438)
+            elseif MyLevel == 300 or MyLevel <= 329 then -- Military Soldier
+                NAMEMON = "Military Soldier [Lv. 300]"
+                NAMEQUEST = "MagmaQuest"
+                NUMBERQUEST = 1
+                CFQUEST = CFrame.new(-5316.55859, 12.2370615, 8517.2998, 0.588437557, -1.37880001e-08, -0.808542669, -2.10116209e-08, 1, -3.23446478e-08, 0.808542669, 3.60215964e-08, 0.588437557)
+                CFPUK = CFrame.new(-5348.2138671875, 51.17809677124, 8737.2431640625)
+                CFM = CFrame.new(-5554.4716796875, 8.5906734466553, 8417.4755859375)
+            elseif MyLevel == 300 or MyLevel <= 374 then -- Military Spy
+                NAMEMON = "Military Spy [Lv. 330]"
+                NAMEQUEST = "MagmaQuest"
+                NUMBERQUEST = 2
+                CFQUEST = CFrame.new(-5316.55859, 12.2370615, 8517.2998, 0.588437557, -1.37880001e-08, -0.808542669, -2.10116209e-08, 1, -3.23446478e-08, 0.808542669, 3.60215964e-08, 0.588437557)
+                CFPUK = CFrame.new(-5887.0732421875, 46.963508605957, 9017.7353515625)
+                CFM = CFrame.new(-5854.5893554688, 77.23063659668, 8838.91796875)
+            elseif MyLevel == 375 or MyLevel <= 399 then -- Fishman Warrior
+                NAMEMON = "Fishman Warrior [Lv. 375]"
+                NAMEQUEST = "FishmanQuest"
+                NUMBERQUEST = 1
+                CFQUEST = CFrame.new(61122.5625, 18.4716396, 1568.16504, 0.893533468, 3.95251609e-09, 0.448996574, -2.34327455e-08, 1, 3.78297464e-08, -0.448996574, -4.43233645e-08, 0.893533468)
+                CFPUK = CFrame.new(60860.73046875, 108.50984954834, 1696.4050292969)
+                CFM = CFrame.new(60855.87890625, 18.47163772583, 1421.5927734375)
+            elseif MyLevel == 400 or MyLevel <= 449 then -- Fishman Commando
+                NAMEMON = "Fishman Commando [Lv. 400]"
+                NAMEQUEST = "FishmanQuest"
+                NUMBERQUEST = 2
+                CFQUEST = CFrame.new(61122.5625, 18.4716396, 1568.16504, 0.893533468, 3.95251609e-09, 0.448996574, -2.34327455e-08, 1, 3.78297464e-08, -0.448996574, -4.43233645e-08, 0.893533468)
+                CFPUK = CFrame.new(61931.2890625, 108.50984954834, 1554.2384033203)
+                CFM = CFrame.new(61966.3046875, 18.482820510864, 1341.7495117188)
+            elseif MyLevel == 450 or MyLevel <= 474 then -- God's Guards
+                NAMEMON = "God's Guard [Lv. 450]"
+                NAMEQUEST = "SkyExp1Quest"
+                NUMBERQUEST = 1
+                CFQUEST = CFrame.new(-4721.71436, 845.277161, -1954.20105, -0.999277651, -5.56969759e-09, 0.0380011722, -4.14751478e-09, 1, 3.75035256e-08, -0.0380011722, 3.73188307e-08, -0.999277651)
+                CFPUK = CFrame.new(-4543.8208007813, 905.34094238281, -1918.3909912109)
+                CFM = CFrame.new(-4624.20703125, 845.07659912109, -1871.3171386719)
+            elseif MyLevel == 475 or MyLevel <= 524 then -- Shandas
+                NAMEMON = "Shanda [Lv. 475]"
+                NAMEQUEST = "SkyExp1Quest"
+                NUMBERQUEST = 2
+                CFQUEST = CFrame.new(-7863.63672, 5545.49316, -379.826324, 0.362120807, -1.98046344e-08, -0.93213129, 4.05822291e-08, 1, -5.48095125e-09, 0.93213129, -3.58431969e-08, 0.362120807)
+                CFPUK = CFrame.new(-7633.181640625, 5545.517578125, -316.40548706055)
+                CFM = CFrame.new(-7600.8896484375, 5545.4916992188, -552.33758544922)
+            elseif MyLevel == 525 or MyLevel <= 549 then -- Royal Squad
+                NAMEMON = "Royal Squad [Lv. 525]"
+                NAMEQUEST = "SkyExp2Quest"
+                NUMBERQUEST = 1
+                CFQUEST = CFrame.new(-7902.66895, 5635.96387, -1411.71802, 0.0504222959, 2.5710392e-08, 0.998727977, 1.12541557e-07, 1, -3.14249675e-08, -0.998727977, 1.13982921e-07, 0.0504222959)
+                CFPUK = CFrame.new(-7531.2758789063, 5606.9033203125, -1341.0496826172)
+                CFM = CFrame.new(-7590.029296875, 5606.876953125, -1441.2878417969)
+            elseif MyLevel == 550 or MyLevel <= 624 then -- Royal Soldier
+                NAMEMON = "Royal Soldier [Lv. 550]"
+                NAMEQUEST = "SkyExp2Quest"
+                NUMBERQUEST = 2
+                CFQUEST = CFrame.new(-7902.66895, 5635.96387, -1411.71802, 0.0504222959, 2.5710392e-08, 0.998727977, 1.12541557e-07, 1, -3.14249675e-08, -0.998727977, 1.13982921e-07, 0.0504222959)
+                CFPUK = CFrame.new(-8061.322265625, 5682.0571289063, -1997.0264892578)
+                CFM = CFrame.new(-7720.9702148438, 5606.876953125, -1667.6120605469)
+            elseif MyLevel == 625 or MyLevel <= 649 then -- Galley Pirate
+                NAMEMON = "Galley Pirate [Lv. 625]"
+                NAMEQUEST = "FountainQuest"
+                NUMBERQUEST = 1
+                CFQUEST = CFrame.new(5254.60156, 38.5011406, 4049.69678, -0.0504891425, -3.62066501e-08, -0.998724639, -9.87921389e-09, 1, -3.57534553e-08, 0.998724639, 8.06145284e-09, -0.0504891425)
+                CFPUK = CFrame.new(5551.1220703125, 110.21348571777, 4082.6567382813)
+                CFM = CFrame.new(5598.1142578125, 54.546047210693, 4031.6364746094)
+            elseif MyLevel >= 650 then -- Galley Captain
+                NAMEMON = "Galley Captain [Lv. 650]"
+                NAMEQUEST = "FountainQuest"
+                NUMBERQUEST = 2
+                 CFQUEST = CFrame.new(5254.60156, 38.5011406, 4049.69678, -0.0504891425, -3.62066501e-08, -0.998724639, -9.87921389e-09, 1, -3.57534553e-08, 0.998724639, 8.06145284e-09, -0.0504891425)
+                CFPUK = CFrame.new(6010.5703125, 72.960571289063, 4896.55859375)
+                CFM = CFrame.new(5623.4233398438, 64.302757263184, 4834.4291992188)
+    end
+    pcall(function()
+    function takequest()
+    local A_1 = "StartQuest"
+    local A_2 = NAMEQUEST
+    local A_3 = NUMBERQUEST
+    local Event = game:GetService("ReplicatedStorage").Remotes["CommF_"]
+    Event:InvokeServer(A_1, A_2, A_3)
+    wait()
+    end
+    if game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == true then
+        
+    else
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFQUEST
+    takequest()
+    end
+    
+    game.Players.LocalPlayer.Character.Humanoid:ChangeState(11)
+    
+    
+    for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+    if v.Name == NAMEMON then
+        
+    if v.Humanoid.Health == 0 or game.Players.LocalPlayer.Character.Humanoid.Health == 0 then
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFPUK
+    
+    else
+         EquipWeapon(SelectWeapon)
+        sethiddenproperty(game.Players.LocalPlayer, "SimulationRadius", math.huge)
+        v.HumanoidRootPart.CanCollide = false
+         v.HumanoidRootPart.CFrame = CFM
+        v.HumanoidRootPart.Size = Vector3.new(30,30,30)
+        v.Humanoid:ChangeState(11)
+    v.HumanoidRootPart.Transparency = 1
+    game:GetService'VirtualUser':CaptureController()
+    game:GetService'VirtualUser':Button1Down(Vector2.new(31, 123))
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.HumanoidRootPart.CFrame * CFrame.new(0,20,0)
+        
+    end
+    end
+    end
+    end)
+    end
+    
+    -- Farm no bring
+     function AQuest()
+        local MyLevel = game:GetService("Players").LocalPlayer.Data.Level.Value
+        if MyLevel == 1 or MyLevel <= 9 then -- Bandit
+                NAMEMON = "Bandit [Lv. 5]"
+                NAMEQUEST = "BanditQuest1"
+                NUMBERQUEST = 1
+                CFQUEST = CFrame.new(1061.66699, 16.5166187, 1544.52905, -0.942978859, -3.33851502e-09, 0.332852632, 7.04340497e-09, 1, 2.99841325e-08, -0.332852632, 3.06188177e-08, -0.942978859)
+                CFPUK = CFrame.new(1221.0729980469, 57.390892028809, 1519.5075683594)
+                CFM = CFrame.new(1166.5871582031, 16.340866088867, 1677.4910888672)
+            elseif MyLevel == 10 or MyLevel <= 14 then -- Monkey
+                NAMEMON = "Monkey [Lv. 14]"
+                NAMEQUEST = "JungleQuest"
+                NUMBERQUEST = 1
+                CFQUEST = CFrame.new(-1604.12012, 36.8521118, 154.23732, 0.0648873374, -4.70858913e-06, -0.997892559, 1.41431883e-07, 1, -4.70933674e-06, 0.997892559, 1.64442184e-07, 0.0648873374)
+                CFPUK = CFrame.new(-1774.37109375, 60.860008239746, 46.497032165527)
+                CFM = CFrame.new(-1785.7883300781, 22.852085113525, 1.5498087406158)
+            elseif MyLevel == 15 or MyLevel <= 29 then -- Gorilla
+                CFM = CFrame.new(-1789.5676269531, 22.852085113525, -46.558128356934)
+                NAMEMON = "Gorilla [Lv. 20]"
+                NAMEQUEST = "JungleQuest"
+                NUMBERQUEST = 2
+                CFQUEST = CFrame.new(-1604.12012, 36.8521118, 154.23732, 0.0648873374, -4.70858913e-06, -0.997892559, 1.41431883e-07, 1, -4.70933674e-06, 0.997892559, 1.64442184e-07, 0.0648873374)
+                CFPUK = CFrame.new(-1133.3891601563, 54.097164154053, -520.93103027344)
+                CFM = CFrame.new(-1234.5366210938, 6.279363155365, -544.36016845703)
+            elseif MyLevel == 30 or MyLevel <= 39 then -- Pirate
+                NAMEMON = "Pirate [Lv. 35]"
+                NAMEQUEST = "BuggyQuest1"
+                NUMBERQUEST = 1
+                CFQUEST = CFrame.new(-1139.59717, 4.75205183, 3825.16211, -0.959730506, -7.5857054e-09, 0.280922383, -4.06310328e-08, 1, -1.11807175e-07, -0.280922383, -1.18718916e-07, -0.959730506)
+                CFPUK = CFrame.new(-1198.9635009766, 44.77783203125, 3831.6071777344)
+                CFM = CFrame.new(-1223.5007324219, 4.7520513534546, 3945.4704589844)
+            elseif MyLevel == 40 or MyLevel <= 59 then -- Brute
+                NAMEMON = "Brute [Lv. 45]"
+                NAMEQUEST = "BuggyQuest1"
+                NUMBERQUEST = 2
+                CFQUEST = CFrame.new(-1139.59717, 4.75205183, 3825.16211, -0.959730506, -7.5857054e-09, 0.280922383, -4.06310328e-08, 1, -1.11807175e-07, -0.280922383, -1.18718916e-07, -0.959730506)
+                CFPUK = CFrame.new(-1149.6790771484, 57.1875, 4176.8774414063)
+                CFM = CFrame.new(-1316.9389648438, 15.089872360229, 4323.5478515625)
+            elseif MyLevel == 60 or MyLevel <= 74 then -- Desert Bandit
+                NAMEMON = "Desert Bandit [Lv. 60]"
+                NAMEQUEST = "DesertQuest"
+                NUMBERQUEST = 1
+                CFQUEST = CFrame.new(897.031128, 6.43846416, 4388.97168, -0.804044724, 3.68233266e-08, 0.594568789, 6.97835176e-08, 1, 3.24365246e-08, -0.594568789, 6.75715199e-08, -0.804044724)
+                CFPUK = CFrame.new(805.94494628906, 20.94552230835, 4357.80078125)
+                CFM = CFrame.new(928.181640625, 6.4481287002563, 4475.3374023438)
+            elseif MyLevel == 75 or MyLevel <= 89 then -- Desert Officre
+                NAMEMON = "Desert Officer [Lv. 70]"
+                NAMEQUEST = "DesertQuest"
+                NUMBERQUEST = 2
+                CFQUEST = CFrame.new(897.031128, 6.43846416, 4388.97168, -0.804044724, 3.68233266e-08, 0.594568789, 6.97835176e-08, 1, 3.24365246e-08, -0.594568789, 6.75715199e-08, -0.804044724)
+                CFPUK = CFrame.new(1468.8266601563, 14.677843093872, 4407.4418945313)
+                CFM = CFrame.new(1643.4937744141, 1.210969209671, 4363.7998046875)
+            elseif MyLevel == 90 or MyLevel <= 99 then -- Snow Bandits
+                NAMEMON = "Snow Bandit [Lv. 90]"
+                NAMEQUEST = "SnowQuest"
+                NUMBERQUEST = 1
+                CFQUEST = CFrame.new(1384.14001, 87.272789, -1297.06482, 0.348555952, -2.53947841e-09, -0.937287986, 1.49860568e-08, 1, 2.86358204e-09, 0.937287986, -1.50443711e-08, 0.348555952)
+                CFPUK = CFrame.new(1414.6539306641, 86.937126159668, -1287.0657958984)
+                CFM = CFrame.new(1240.6696777344, 87.272766113281, -1348.1037597656)
+            elseif MyLevel == 100 or MyLevel <= 119 then -- Snowman
+                NAMEMON = "Snowman [Lv. 100]"
+                NAMEQUEST = "SnowQuest"
+                NUMBERQUEST = 2
+                CFQUEST = CFrame.new(1384.14001, 87.272789, -1297.06482, 0.348555952, -2.53947841e-09, -0.937287986, 1.49860568e-08, 1, 2.86358204e-09, 0.937287986, -1.50443711e-08, 0.348555952)
+                CFPUK = CFrame.new(1007.452331543, 133.08332824707, -1594.0411376953)
+                CFM = CFrame.new(1110.1461181641, 105.76805877686, -1618.0068359375)
+            elseif MyLevel == 120 or MyLevel <= 149 then -- Chief Petty Officer
+                NAMEMON = "Chief Petty Officer [Lv. 120]"
+                NAMEQUEST = "MarineQuest2"
+                NUMBERQUEST = 1
+                CFQUEST = CFrame.new(-5035.0835, 28.6520386, 4325.29443, 0.0243340395, -7.08064647e-08, 0.999703884, -6.36926814e-08, 1, 7.23777944e-08, -0.999703884, -6.54350671e-08, 0.0243340395)
+                CFPUK = CFrame.new(-4928.982421875, 157.81146240234, 4317.98046875)
+                CFM = CFrame.new(-4658.2138671875, 20.652032852173, 4425.458984375)
+            elseif MyLevel == 150 or MyLevel <= 174 then -- Sky Bandit
+                NAMEMON = "Sky Bandit [Lv. 150]"
+                NAMEQUEST = "SkyQuest"
+                NUMBERQUEST = 1
+                CFQUEST = CFrame.new(-4841.83447, 717.669617, -2623.96436, -0.875942111, 5.59710216e-08, -0.482416272, 3.04023082e-08, 1, 6.08195947e-08, 0.482416272, 3.86078725e-08, -0.875942111)
+                CFPUK = CFrame.new(-4930.1630859375, 345.59069824219, -3022.9479980469)
+                CFM = CFrame.new(-5017.8369140625, 278.06719970703, -2865.0737304688)
+            elseif MyLevel == 175 or MyLevel <= 224 then -- Dark Master
+                NAMEMON = "Dark Master [Lv. 175]"
+                NAMEQUEST = "SkyQuest"
+                NUMBERQUEST = 2
+                CFQUEST = CFrame.new(-4841.83447, 717.669617, -2623.96436, -0.875942111, 5.59710216e-08, -0.482416272, 3.04023082e-08, 1, 6.08195947e-08, 0.482416272, 3.86078725e-08, -0.875942111)
+                CFPUK = CFrame.new(-5172.0805664063, 500.80151367188, -2455.4348144531)
+                CFM = CFrame.new(-5237.7626953125, 388.65194702148, -2153.8889160156)
+            elseif MyLevel == 225 or MyLevel <= 274 then -- Toga Warrior
+                NAMEMON = "Toga Warrior [Lv. 225]"
+                NAMEQUEST = "ColosseumQuest"
+                NUMBERQUEST = 1
+                CFQUEST = CFrame.new(-1576.11743, 7.38933945, -2983.30762, 0.576966345, 1.22114863e-09, 0.816767931, -3.58496594e-10, 1, -1.24185606e-09, -0.816767931, 4.2370063e-10, 0.576966345)
+                CFPUK =CFrame.new(-1997.6246337891, 39.396636962891, -2884.7023925781)
+                CFM = CFrame.new(-1949.8349609375, 7.2890725135803, -2767.2380371094)
+            elseif MyLevel == 275 or MyLevel <= 299 then -- Gladiato
+                NAMEMON = "Gladiator [Lv. 275]"
+                NAMEQUEST = "ColosseumQuest"
+                NUMBERQUEST = 2
+                CFQUEST = CFrame.new(-1576.11743, 7.38933945, -2983.30762, 0.576966345, 1.22114863e-09, 0.816767931, -3.58496594e-10, 1, -1.24185606e-09, -0.816767931, 4.2370063e-10, 0.576966345)
+                CFPUK = CFrame.new(-1493.1932373047, 39.39603805542, -3326.3317871094)
+                CFM = CFrame.new(-1280.6323242188, 7.4425458908081, -3248.9389648438)
+            elseif MyLevel == 300 or MyLevel <= 329 then -- Military Soldier
+                NAMEMON = "Military Soldier [Lv. 300]"
+                NAMEQUEST = "MagmaQuest"
+                NUMBERQUEST = 1
+                CFQUEST = CFrame.new(-5316.55859, 12.2370615, 8517.2998, 0.588437557, -1.37880001e-08, -0.808542669, -2.10116209e-08, 1, -3.23446478e-08, 0.808542669, 3.60215964e-08, 0.588437557)
+                CFPUK = CFrame.new(-5348.2138671875, 51.17809677124, 8737.2431640625)
+                CFM = CFrame.new(-5554.4716796875, 8.5906734466553, 8417.4755859375)
+            elseif MyLevel == 300 or MyLevel <= 374 then -- Military Spy
+                NAMEMON = "Military Spy [Lv. 330]"
+                NAMEQUEST = "MagmaQuest"
+                NUMBERQUEST = 2
+                CFQUEST = CFrame.new(-5316.55859, 12.2370615, 8517.2998, 0.588437557, -1.37880001e-08, -0.808542669, -2.10116209e-08, 1, -3.23446478e-08, 0.808542669, 3.60215964e-08, 0.588437557)
+                CFPUK = CFrame.new(-5887.0732421875, 46.963508605957, 9017.7353515625)
+                CFM = CFrame.new(-5854.5893554688, 77.23063659668, 8838.91796875)
+            elseif MyLevel == 375 or MyLevel <= 399 then -- Fishman Warrior
+                NAMEMON = "Fishman Warrior [Lv. 375]"
+                NAMEQUEST = "FishmanQuest"
+                NUMBERQUEST = 1
+                CFQUEST = CFrame.new(61122.5625, 18.4716396, 1568.16504, 0.893533468, 3.95251609e-09, 0.448996574, -2.34327455e-08, 1, 3.78297464e-08, -0.448996574, -4.43233645e-08, 0.893533468)
+                CFPUK = CFrame.new(60860.73046875, 108.50984954834, 1696.4050292969)
+                CFM = CFrame.new(60855.87890625, 18.47163772583, 1421.5927734375)
+            elseif MyLevel == 400 or MyLevel <= 449 then -- Fishman Commando
+                NAMEMON = "Fishman Commando [Lv. 400]"
+                NAMEQUEST = "FishmanQuest"
+                NUMBERQUEST = 2
+                CFQUEST = CFrame.new(61122.5625, 18.4716396, 1568.16504, 0.893533468, 3.95251609e-09, 0.448996574, -2.34327455e-08, 1, 3.78297464e-08, -0.448996574, -4.43233645e-08, 0.893533468)
+                CFPUK = CFrame.new(61931.2890625, 108.50984954834, 1554.2384033203)
+                CFM = CFrame.new(61966.3046875, 18.482820510864, 1341.7495117188)
+            elseif MyLevel == 450 or MyLevel <= 474 then -- God's Guards
+                NAMEMON = "God's Guard [Lv. 450]"
+                NAMEQUEST = "SkyExp1Quest"
+                NUMBERQUEST = 1
+                CFQUEST = CFrame.new(-4721.71436, 845.277161, -1954.20105, -0.999277651, -5.56969759e-09, 0.0380011722, -4.14751478e-09, 1, 3.75035256e-08, -0.0380011722, 3.73188307e-08, -0.999277651)
+                CFPUK = CFrame.new(-4543.8208007813, 905.34094238281, -1918.3909912109)
+                CFM = CFrame.new(-4624.20703125, 845.07659912109, -1871.3171386719)
+            elseif MyLevel == 475 or MyLevel <= 524 then -- Shandas
+                NAMEMON = "Shanda [Lv. 475]"
+                NAMEQUEST = "SkyExp1Quest"
+                NUMBERQUEST = 2
+                CFQUEST = CFrame.new(-7863.63672, 5545.49316, -379.826324, 0.362120807, -1.98046344e-08, -0.93213129, 4.05822291e-08, 1, -5.48095125e-09, 0.93213129, -3.58431969e-08, 0.362120807)
+                CFPUK = CFrame.new(-7633.181640625, 5545.517578125, -316.40548706055)
+                CFM = CFrame.new(-7600.8896484375, 5545.4916992188, -552.33758544922)
+            elseif MyLevel == 525 or MyLevel <= 549 then -- Royal Squad
+                NAMEMON = "Royal Squad [Lv. 525]"
+                NAMEQUEST = "SkyExp2Quest"
+                NUMBERQUEST = 1
+                CFQUEST = CFrame.new(-7902.66895, 5635.96387, -1411.71802, 0.0504222959, 2.5710392e-08, 0.998727977, 1.12541557e-07, 1, -3.14249675e-08, -0.998727977, 1.13982921e-07, 0.0504222959)
+                CFPUK = CFrame.new(-7531.2758789063, 5606.9033203125, -1341.0496826172)
+                CFM = CFrame.new(-7590.029296875, 5606.876953125, -1441.2878417969)
+            elseif MyLevel == 550 or MyLevel <= 624 then -- Royal Soldier
+                NAMEMON = "Royal Soldier [Lv. 550]"
+                NAMEQUEST = "SkyExp2Quest"
+                NUMBERQUEST = 2
+                CFQUEST = CFrame.new(-7902.66895, 5635.96387, -1411.71802, 0.0504222959, 2.5710392e-08, 0.998727977, 1.12541557e-07, 1, -3.14249675e-08, -0.998727977, 1.13982921e-07, 0.0504222959)
+                CFPUK = CFrame.new(-8061.322265625, 5682.0571289063, -1997.0264892578)
+                CFM = CFrame.new(-7720.9702148438, 5606.876953125, -1667.6120605469)
+            elseif MyLevel == 625 or MyLevel <= 649 then -- Galley Pirate
+                NAMEMON = "Galley Pirate [Lv. 625]"
+                NAMEQUEST = "FountainQuest"
+                NUMBERQUEST = 1
+                CFQUEST = CFrame.new(5254.60156, 38.5011406, 4049.69678, -0.0504891425, -3.62066501e-08, -0.998724639, -9.87921389e-09, 1, -3.57534553e-08, 0.998724639, 8.06145284e-09, -0.0504891425)
+                CFPUK = CFrame.new(5551.1220703125, 110.21348571777, 4082.6567382813)
+                CFM = CFrame.new(5598.1142578125, 54.546047210693, 4031.6364746094)
+            elseif MyLevel >= 650 then -- Galley Captain
+                NAMEMON = "Galley Captain [Lv. 650]"
+                NAMEQUEST = "FountainQuest"
+                NUMBERQUEST = 2
+                 CFQUEST = CFrame.new(5254.60156, 38.5011406, 4049.69678, -0.0504891425, -3.62066501e-08, -0.998724639, -9.87921389e-09, 1, -3.57534553e-08, 0.998724639, 8.06145284e-09, -0.0504891425)
+                CFPUK = CFrame.new(6010.5703125, 72.960571289063, 4896.55859375)
+                CFM = CFrame.new(5623.4233398438, 64.302757263184, 4834.4291992188)
+    end
+    pcall(function()
+    function takequest()
+    local A_1 = "StartQuest"
+    local A_2 = NAMEQUEST
+    local A_3 = NUMBERQUEST
+    local Event = game:GetService("ReplicatedStorage").Remotes["CommF_"]
+    Event:InvokeServer(A_1, A_2, A_3)
+    wait()
+    end
+    if game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == true then
+        
+    else
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFQUEST
+    takequest()
+    end
+    
+    game.Players.LocalPlayer.Character.Humanoid:ChangeState(11)
+    
+    
+    for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+    if v.Name == NAMEMON then
+        
+    if v.Humanoid.Health == 0 or game.Players.LocalPlayer.Character.Humanoid.Health == 0 then
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFPUK
+    
+    else
+        EquipWeapon(SelectWeapon)
+        v.HumanoidRootPart.CanCollide = false
+        v.HumanoidRootPart.Size = Vector3.new(60,60,60)
+        v.Humanoid:ChangeState(11)
+    v.HumanoidRootPart.Transparency = 1
+    game:GetService'VirtualUser':CaptureController()
+    game:GetService'VirtualUser':Button1Down(Vector2.new(31, 123))
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.HumanoidRootPart.CFrame * CFrame.new(0,20,0)
+        
+    end
+    end
+    end
+    end)
+    end
+    
+     tgls:Toggle("AutoFarm-ธรรมม้ะดา",false, function(value)
+    shared.Aruh = value
+    local args = {
+                    [1] = "AbandonQuest"
+                }
+                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+
+local args = {
+    [1] = "Buso"
+}
+
+game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+if game.Players.LocalPlayer.Character.Humanoid.Health <= 0 then
+
+local args = {
+    [1] = "Buso"
+}
+
+game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+end
+    end)
+    spawn(function()
+    while wait() do
+    if shared.Aruh then
+    AQuest()
+    wait()
+    end
+    end
+    end)
+    
+    tgls:Toggle("AutoFarm-Bring",false, function(value)
+    shared.Bruh = value
+    local args = {
+                    [1] = "AbandonQuest"
+                }
+                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+                local args = {
+    [1] = "Buso"
+}
+
+game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+if game.Players.LocalPlayer.CHaracter.Humanoid.Health <= 0 then
+
+local args = {
+    [1] = "Buso"
+}
+
+game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+end
+    end)
+    spawn(function()
+    while wait() do
+    if shared.Bruh then
+    Quest()
+    wait()
+    end
+    end
+    end)
+    
+    tgls:Toggle("AutoSuperHuman",false, function(value)
+    Superhuman = value
+                while Superhuman do wait()
+                    if Superhuman then
+                        if game.Players.LocalPlayer.Backpack:FindFirstChild("Combat") or game.Players.LocalPlayer.Character:FindFirstChild("Combat") then
+                            local args = {
+                                [1] = "BuyBlackLeg"
+                            }
+                            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+                        end   
+                        if game.Players.LocalPlayer.Character:FindFirstChild("Superhuman") or game.Players.LocalPlayer.Backpack:FindFirstChild("Superhuman") then
+                           local SPHUMAN = "Superhuman"
+if game.Players.LocalPlayer.Backpack:FindFirstChild(SPHUMAN) then
+      local tool = game.Players.LocalPlayer.Backpack:FindFirstChild(SPHUMAN)
+      wait(.4)
+      game.Players.LocalPlayer.Character.Humanoid:EquipTool(tool)
+end
+                        end  
+                        if game.Players.LocalPlayer.Backpack:FindFirstChild("Black Leg") or game.Players.LocalPlayer.Character:FindFirstChild("Black Leg") or game.Players.LocalPlayer.Backpack:FindFirstChild("Electro") or game.Players.LocalPlayer.Character:FindFirstChild("Electro") or game.Players.LocalPlayer.Backpack:FindFirstChild("Fishman Karate") or game.Players.LocalPlayer.Character:FindFirstChild("Fishman Karate") or game.Players.LocalPlayer.Backpack:FindFirstChild("Dragon Claw") or game.Players.LocalPlayer.Character:FindFirstChild("Dragon Claw") then
+                            if game.Players.LocalPlayer.Backpack:FindFirstChild("Black Leg") and game.Players.LocalPlayer.Backpack:FindFirstChild("Black Leg").Level.Value <= 299 then
+                                local BLLEG = "Black Leg"
+if game.Players.LocalPlayer.Backpack:FindFirstChild(BLLEG) then
+      local tool = game.Players.LocalPlayer.Backpack:FindFirstChild(BLLEG)
+      wait(.4)
+      game.Players.LocalPlayer.Character.Humanoid:EquipTool(tool)
+end
+                            end
+                            if game.Players.LocalPlayer.Backpack:FindFirstChild("Electro") and game.Players.LocalPlayer.Backpack:FindFirstChild("Electro").Level.Value <= 299 then
+                                 local ELTRO = "Electro"
+if game.Players.LocalPlayer.Backpack:FindFirstChild(ELTRO) then
+      local tool = game.Players.LocalPlayer.Backpack:FindFirstChild(ELTRO)
+      wait(.4)
+      game.Players.LocalPlayer.Character.Humanoid:EquipTool(tool)
+end
+                            end
+                            if game.Players.LocalPlayer.Backpack:FindFirstChild("Fishman Karate") and game.Players.LocalPlayer.Backpack:FindFirstChild("Fishman Karate").Level.Value <= 299 then
+                                local FKARATE = "Fishman Karate"
+if game.Players.LocalPlayer.Backpack:FindFirstChild(FKARATE) then
+      local tool = game.Players.LocalPlayer.Backpack:FindFirstChild(FKARATE)
+      wait(.4)
+      game.Players.LocalPlayer.Character.Humanoid:EquipTool(tool)
+end
+                            end
+                            if game.Players.LocalPlayer.Backpack:FindFirstChild("Dragon Claw") and game.Players.LocalPlayer.Backpack:FindFirstChild("Dragon Claw").Level.Value <= 299 then
+                                local DGCLAW = "Dragon Claw"
+if game.Players.LocalPlayer.Backpack:FindFirstChild(DGCLAW) then
+      local tool = game.Players.LocalPlayer.Backpack:FindFirstChild(DGCLAW)
+      wait(.4)
+      game.Players.LocalPlayer.Character.Humanoid:EquipTool(tool)
+end
+                            end
+                            if game.Players.LocalPlayer.Backpack:FindFirstChild("Black Leg") and game.Players.LocalPlayer.Backpack:FindFirstChild("Black Leg").Level.Value >= 300 then
+                                local args = {
+                                    [1] = "BuyElectro"
+                                }
+                                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+                            end
+                            if game.Players.LocalPlayer.Character:FindFirstChild("Black Leg") and game.Players.LocalPlayer.Character:FindFirstChild("Black Leg").Level.Value >= 300 then
+                                local args = {
+                                    [1] = "BuyElectro"
+                                }
+                                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+                            end
+                            if game.Players.LocalPlayer.Backpack:FindFirstChild("Electro") and game.Players.LocalPlayer.Backpack:FindFirstChild("Electro").Level.Value >= 300 then
+                                local args = {
+                                    [1] = "BuyFishmanKarate"
+                                }
+                                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+                            end
+                            if game.Players.LocalPlayer.Character:FindFirstChild("Electro") and game.Players.LocalPlayer.Character:FindFirstChild("Electro").Level.Value >= 300 then
+                                local args = {
+                                    [1] = "BuyFishmanKarate"
+                                }
+                                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+                            end
+                            if game.Players.LocalPlayer.Backpack:FindFirstChild("Fishman Karate") and game.Players.LocalPlayer.Backpack:FindFirstChild("Fishman Karate").Level.Value >= 300 then
+                                local args = {
+                                    [1] = "BlackbeardReward",
+                                    [2] = "DragonClaw",
+                                    [3] = "1"
+                                }
+                                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+                                local args = {
+                                    [1] = "BlackbeardReward",
+                                    [2] = "DragonClaw",
+                                    [3] = "2"
+                                }
+                                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args)) 
+                            end
+                            if game.Players.LocalPlayer.Character:FindFirstChild("Fishman Karate") and game.Players.LocalPlayer.Character:FindFirstChild("Fishman Karate").Level.Value >= 300 then
+                                local args = {
+                                    [1] = "BlackbeardReward",
+                                    [2] = "DragonClaw",
+                                    [3] = "1"
+                                }
+                                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+                                local args = {
+                                    [1] = "BlackbeardReward",
+                                    [2] = "DragonClaw",
+                                    [3] = "2"
+                                }
+                                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args)) 
+                            end
+                            if game.Players.LocalPlayer.Backpack:FindFirstChild("Dragon Claw") and game.Players.LocalPlayer.Backpack:FindFirstChild("Dragon Claw").Level.Value >= 300 then
+                                local args = {
+                                    [1] = "BuySuperhuman"
+                                }
+                                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+                            end
+                            if game.Players.LocalPlayer.Character:FindFirstChild("Dragon Claw") and game.Players.LocalPlayer.Character:FindFirstChild("Dragon Claw").Level.Value >= 300 then
+                                local args = {
+                                    [1] = "BuySuperhuman"
+                                }
+                                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+                            end 
+                        end
+                    end
+                end
+    end)
+   tgls:Toggle("AutoDeathStep",false, function(value)
+    DeathStep = value
+                while DeathStep do wait()
+                    if DeathStep then
+                            local args = {
+                                [1] = "BuyBlackLeg"
+                            }
+                            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+                        
+                            if game.Players.LocalPlayer.Backpack:FindFirstChild("Black Leg") and game.Players.LocalPlayer.Backpack:FindFirstChild("Black Leg").Level.Value <= 449  then
+                                local BLLEG = "Black Leg"
+if game.Players.LocalPlayer.Backpack:FindFirstChild(BLLEG) then
+      local tool = game.Players.LocalPlayer.Backpack:FindFirstChild(BLLEG)
+      wait(.4)
+      game.Players.LocalPlayer.Character.Humanoid:EquipTool(tool)
+end
+                      if game.Players.LocalPlayer.Backpack:FindFirstChild("Black Leg") and game.Players.LocalPlayer.Backpack:FindFirstChild("Black Leg").Level.Value >= 450  then
+
+local args = {
+    [1] = "BuyDeathStep",
+    [2] = true
+}
+
+game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+
+                      end
+                end
+                end
+                    end
+   end)
+ 
+
+    tgls:Seperator()
+    tgls:Button("KillAura", function()
+        local a = game:GetService("Workspace").Enemies:GetChildren()
+    for i,v in pairs(a) do
+        v.Humanoid.Health = 0
+        v.HumanoidRootPart.Size = Vector3.new(60,60,60)
+        v.HumanoidRootPart.Transparency = 0.5
+        end
+    end)
+    
+    
+        
+        
+    local M = serv:Channel("AutoStat")
+    
+    M:Toggle("Melee",false, function(Value)
+        _G.A = Value
+    while _G.A do wait()
+    local args = {
+        [1] = "AddPoint",
+        [2] = "Melee",
+        [3] = 1
+    }
+    
+    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+    wait()
+    end
+    end)
+    
+    
+        
+          M:Toggle("Defense",false, function(Value)
+       _G.A = Value
+    while _G.A do wait()
+    local args = {
+        [1] = "AddPoint",
+        [2] = "Defense",
+        [3] = 1
+    }
+    
+    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+    wait()
+    end
+    end)
+    
+        M:Toggle("Sword",false, function(Value)
+        __G.A = Value
+    while _G.A do wait()
+    local args = {
+        [1] = "AddPoint",
+        [2] = "Sword",
+        [3] = 1
+    }
+    
+    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+    wait()
+    end
+    end)
+    
+      M:Toggle("Gun",false, function(Value)
+    _G.A = Value
+    while _G.A do wait()
+    local args = {
+        [1] = "AddPoint",
+        [2] = "Gun",
+        [3] = 1
+    }
+    
+    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+    wait()
+    end
+    end)
+    
+    
+     M:Toggle("Blox Fruits",false, function(Value)
+    _G.A = Value
+    while _G.A do wait()
+    local args = {
+        [1] = "AddPoint",
+        [2] = "Demon Fruit",
+        [3] = 1
+    }
+    
+    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+    wait()
+    end
+    end)
+    
+    
+    local P = serv:Channel("Player")
+    
+    local sldr = P:Slider("WalkSpeed", 0, 500, 16, function(t)
+        game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = t
+        end)
+    P:Seperator()
+        local sldr = P:Slider("JumpPower", 0, 500, 30, function(t)
+            game.Players.LocalPlayer.Character.Humanoid.JumpPower = t
+            end)
+    
+    local T = serv:Channel("TeleportIsland")
+    
+    T:Button("WindMill", function()
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(1144.9758300781, 16.359743118286, 1329.4919433594)
+    end)
+    T:Button("Jungle", function()
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-1504.4803466797, 47.887054443359, -78.06356048584)
+    end)
+    T:Button("MiddleTown", function()
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-851.44720458984, 7.6872386932373, 1483.1424560547)
+    end)
+    T:Button("MarineFord", function()
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-4997.1000976563, 63.38484954834, 4449.359375)
+    end)
+    T:Button("PirateVillage", function()
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-1157.2733154297, 32.596988677979, 4124.8212890625)
+    end)
+    T:Button("Desert", function()
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(1217.1528320313, 6.4735026359558, 4237.3266601563)
+    end)
+    T:Button("FrozenVillage", function()
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(1256.1680908203, 45.359600067139, -1226.6164550781)
+    end)
+    T:Button("Colosseum", function()
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-1428.3547363281, 7.4243764877319, -3014.373046875)
+    end)
+    T:Button("SkyIsland1stFloor", function()
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-4691.3110351563, 717.68145751953, -2630.49609375)
+    end)
+    T:Button("SkyIsland2ndFloor", function()
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-4839.4169921875, 850.13720703125, -1840.1959228516)
+    end)
+    T:Button("SkyIsland3rdFloor", function()
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-8021.62109375, 5564.328125, -350.09893798828)
+    end)
+    T:Button("Prison", function()
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(4850.712890625, 5.686728477478, 726.03198242188)
+    end)
+    T:Button("MagmaVillage", function()
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-5265.3540039063, 26.195816040039, 8612.2587890625)
+    end)
+    T:Button("UnderWaterCity", function()
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(61379.265625, 7.0000472068787, 1711.3155517578)
+    end)
+    T:Button("FoutainCity", function()
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(5149.96875, 4.5363273620605, 3992.1625976563)
+    end)
+    T:Button("ShankRoom", function()
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-1437.5698242188, 29.88703918457, -10.984558105469)
+    end)
+    
+    local Misc = serv:Channel("Misc")
+    
+    Misc:Button("RedeemAllCode", function()
+        local args = {
+            [1] = "SUB2GAMERROBOT_EXP1"
+        }
+        
+        game:GetService("ReplicatedStorage").Remotes.Redeem:InvokeServer(unpack(args))
+        local args = {
+            [1] = "Sub2NoobMaster123"
+        }
+        
+        game:GetService("ReplicatedStorage").Remotes.Redeem:InvokeServer(unpack(args))
+        local args = {
+            [1] = "Sub2Daigrock "
+        }
+        
+        game:GetService("ReplicatedStorage").Remotes.Redeem:InvokeServer(unpack(args))
+        local args = {
+            [1] = "Axiore "
+        }
+        
+        game:GetService("ReplicatedStorage").Remotes.Redeem:InvokeServer(unpack(args))
+        local args = {
+            [1] = "TantaiGaming "
+        }
+        
+        game:GetService("ReplicatedStorage").Remotes.Redeem:InvokeServer(unpack(args))
+        local args = {
+            [1] = "StrawHatMaine "
+        }
+        
+        game:GetService("ReplicatedStorage").Remotes.Redeem:InvokeServer(unpack(args))
+        local args = {
+            [1] = "Sub2OfficialNoobie "
+        }
+        
+        game:GetService("ReplicatedStorage").Remotes.Redeem:InvokeServer(unpack(args))
+        local args = {
+            [1] = "Fudd10 "
+        }
+        
+        game:GetService("ReplicatedStorage").Remotes.Redeem:InvokeServer(unpack(args))
+        local args = {
+            [1] = "Bignews "
+        }
+        
+        game:GetService("ReplicatedStorage").Remotes.Redeem:InvokeServer(unpack(args))
+        local args = {
+            [1] = "TheGreatAce "
+        }
+        
+        game:GetService("ReplicatedStorage").Remotes.Redeem:InvokeServer(unpack(args))
+        end)
+    Misc:Seperator()
+        Misc:Button("RestatCode1", function()
+             local args = {
+        [1] = "Sub2UncleKizaru "
+    }
+    
+    game:GetService("ReplicatedStorage").Remotes.Redeem:InvokeServer(unpack(args))
+    end)
+    
+    Misc:Button("RestatCode2", function()
+        local args = {
+            [1] = "SUB2GAMERROBOT_RESET1 "
+        }
+        
+        game:GetService("ReplicatedStorage").Remotes.Redeem:InvokeServer(unpack(args))
+        end)
+    Misc:Seperator()
+        Misc:Button("OpenFruitsDealer", function()
+            
+    
+    local args = {
+        [1] = "GetFruits"
+    }
+    
+    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+    game.Players.localPlayer.PlayerGui.Main.FruitShop.Visible = true
+    
+    end)
+    
+    Misc:Button("OpenInventory", function()
+        local args = {
+            [1] = "getInventoryWeapons"
+        }
+        
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+        game.Players.localPlayer.PlayerGui.Main.Inventory.Visible = true
+        
+    end)
+    Misc:Button("OpenColorHaki", function()
+
+
+
+local args = {
+    [1] = "getColors"
+}
+
+game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+
+game.Players.localPlayer.PlayerGui.Main.Colors.Visible = true
+
+end)
+
+Misc:Button("OpenAwakeAbility", function()
+
+
+local args = {
+    [1] = "getAwakenedAbilities"
+}
+
+game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+
+
+
+end)
+Misc:Button("OpenTitle",function()
+			local args = {
+				[1] = "getTitles"
+			}
+			game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+			game.Players.localPlayer.PlayerGui.Main.Titles.Visible = true
+		end)
+    Misc:Seperator()
+        Misc:Button("FPSBoost", function()
+    
+            for _,v in pairs(workspace:GetDescendants()) do
+                if v.ClassName == "Part"
+                or v.ClassName == "SpawnLocation"
+                or v.ClassName == "WedgePart"
+                or v.ClassName == "Terrain"
+                or v.ClassName == "MeshPart" then
+                v.Material = "Plastic"
+                end
+                end
+        end)
+        Misc:Button("SeverHop", function()
+               local PlaceID = game.PlaceId
+                local AllIDs = {}
+                local foundAnything = ""
+                local actualHour = os.date("!*t").hour
+                local Deleted = false
+                function TPReturner()
+                    local Site;
+                    if foundAnything == "" then
+                        Site = game.HttpService:JSONDecode(game:HttpGet('https://games.roblox.com/v1/games/' .. PlaceID .. '/servers/Public?sortOrder=Asc&limit=100'))
+                    else
+                        Site = game.HttpService:JSONDecode(game:HttpGet('https://games.roblox.com/v1/games/' .. PlaceID .. '/servers/Public?sortOrder=Asc&limit=100&cursor=' .. foundAnything))
+                    end
+                    local ID = ""
+                    if Site.nextPageCursor and Site.nextPageCursor ~= "null" and Site.nextPageCursor ~= nil then
+                        foundAnything = Site.nextPageCursor
+                    end
+                    local num = 0;
+                    for i,v in pairs(Site.data) do
+                        local Possible = true
+                        ID = tostring(v.id)
+                        if tonumber(v.maxPlayers) > tonumber(v.playing) then
+                            for _,Existing in pairs(AllIDs) do
+                                if num ~= 0 then
+                                    if ID == tostring(Existing) then
+                                        Possible = false
+                                    end
+                                else
+                                    if tonumber(actualHour) ~= tonumber(Existing) then
+                                        local delFile = pcall(function()
+                                            -- delfile("NotSameServers.json")
+                                            AllIDs = {}
+                                            table.insert(AllIDs, actualHour)
+                                        end)
+                                    end
+                                end
+                                num = num + 1
+                            end
+                            if Possible == true then
+                                table.insert(AllIDs, ID)
+                                wait()
+                                pcall(function()
+                                    -- writefile("NotSameServers.json", game:GetService('HttpService'):JSONEncode(AllIDs))
+                                    wait()
+                                    game:GetService("TeleportService"):TeleportToPlaceInstance(PlaceID, ID, game.Players.LocalPlayer)
+                                end)
+                                wait(4)
+                            end
+                        end
+                    end
+                end
+                function Teleport() 
+                    while wait() do
+                        pcall(function()
+                            TPReturner()
+                            if foundAnything ~= "" then
+                                TPReturner()
+                            end
+                        end)
+                    end
+                end
+                Teleport()
+        end)
+         Misc:Seperator()
+        Misc:Toggle("CtrlclickTP",false,function(vu)
+			CTRL = vu
+        end)
+        NDGC = false
+		function NocooldownD()
+			if NDGC then
+				for i,v in next, getgc() do
+					if game.Players.LocalPlayer.Character.Dodge then
+						if typeof(v) == "function" and getfenv(v).script == game.Players.LocalPlayer.Character.Dodge then
+							for i2,v2 in next, getupvalues(v) do
+								if tostring(v2) == "0.4" then
+									repeat wait(.1)
+										setupvalue(v,i2,0)
+									until not NDGC
+								end
+							end
+						end
+					end
+				end
+			end
+		end
+        Misc:Toggle("DodgeNoCooldown",false,function(value)
+	 NDGC = value
+			NocooldownD()
+	 end)
+        local S = serv:Channel("Shop")  
+        Misc:Button("Noclip",function(vv)
+           while wait() do
+                game.Players.LocalPlayer.Character.Humanoid:ChangeState(11)
+          end
+        end)
+        
+        local LocalPlayer = game:GetService'Players'.LocalPlayer
+		local originalstam = LocalPlayer.Character.Energy.Value
+		function infinitestam()
+			LocalPlayer.Character.Energy.Changed:connect(function()
+				if InfinitsEnergy then
+					LocalPlayer.Character.Energy.Value = originalstam
+				end 
+			end)
+		end
+		spawn(function()
+			while wait(.1) do
+				if InfinitsEnergy then
+					wait(0.3)
+					originalstam = LocalPlayer.Character.Energy.Value
+					infinitestam()
+				end
+			end
+		end)
+		Misc:Toggle("InfEnergy",false,function(value)
+
+			InfinitsEnergy = value
+			originalstam = LocalPlayer.Character.Energy.Value
+
+		end)
+
+    
+    S:Label("FightingStyle")
+    S:Button("BlackLeg", function()
+        local args = {
+            [1] = "BuyBlackLeg"
+        }
+        
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+        end)
+                
+    S:Button("Electro", function()
+        local args = {
+            [1] = "BuyElectro"
+        }
+        
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+        end)
+    S:Button("FishmanKarate", function()
+        local args = {
+            [1] = "BuyFishmanKarate"
+        }
+        
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+        end)
+    S:Seperator()
+    S:Label("Ability")
+    S:Button("Geppo", function()
+        local args = {
+            [1] = "BuyHaki",
+            [2] = "Geppo"
+        }
+        
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+        end)
+    S:Button("BusoHaki", function()
+        local args = {
+            [1] = "BuyHaki",
+            [2] = "Buso"
+        }
+        
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+        end)
+        S:Button("Soru", function()
+            local args = {
+                [1] = "BuyHaki",
+                [2] = "Soru"
+            }
+            
+            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+        end)
+
+
+        elseif 
+    game.PlaceId == 4442272183 then
+        game.Players.LocalPlayer.Character.Movement.Disabled = true
+       local DiscordLib = loadstring(game:HttpGet"https://raw.githubusercontent.com/dawid-scripts/UI-Libs/main/discord%20lib.txt")()
+    game.Players.LocalPlayer.Character.Movement.Disabled = true
+    local win = DiscordLib:Window("AG HUB Paid - Blox Fruits")
+    
+    local serv = win:Server("Main", "")
+    
+    local tgls = serv:Channel("AutoFarm")
+    
+    local Plr = game:GetService("Players").LocalPlayer
+		local Mouse = Plr:GetMouse()
+		Mouse.Button1Down:connect(
+			function()
+				if not game:GetService("UserInputService"):IsKeyDown(Enum.KeyCode.LeftControl) then
+					return
+				end
+				if not Mouse.Target then
+					return
+				end
+				if CTRL then
+					Plr.Character:MoveTo(Mouse.Hit.p)
+				end
+			end)
+
+
+
+-- Wapon
+Weapon = {}
+		for i,v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do  
+			if v:IsA("Tool") then
+				table.insert(Weapon ,v.Name)
+			end
+		end
+		for i,v in pairs(game.Players.LocalPlayer.Character:GetChildren()) do  
+			if v:IsA("Tool") then
+				table.insert(Weapon, v.Name)
+			end
+		end
+		-- SelectToolWeapon
+		SelectWeapon = ""
+		function EquipWeapon(Tool)
+			if game.Players.LocalPlayer.Backpack:FindFirstChild(Tool) then
+				local tool = game.Players.LocalPlayer.Backpack:FindFirstChild(Tool)
+				wait(.4)
+				game.Players.LocalPlayer.Character.Humanoid:EquipTool(tool)
+			end
+		end
+		
+		local SLWP = serv:Channel("AutoWeapon")
+		-- addDropdown
+local Drop = SLWP:Dropdown("SelectWeapon",Weapon,function(vu)
+			SelectWeapon = vu
+end)
+	SLWP:Button("RefreshWeapon", function(vu)
+	    Refresh = vu
+	    if Refresh then
+Drop:Clear() 
+else 
+    SelectWeapon = vu
+    
+
+
+end
+end)
+    function NQuest()
+        local MyLevel = game:GetService("Players").LocalPlayer.Data.Level.Value
+        if MyLevel == 700 or MyLevel <= 724 then -- Raider [Lv. 700]
+			NAMEMON = "Raider [Lv. 700]"
+			NAMEQUEST = "Area1Quest"
+			NUMBERQUEST = 1
+			CFQUEST = CFrame.new(-424.080078, 73.0055847, 1836.91589, 0.253544956, -1.42165932e-08, 0.967323601, -6.00147771e-08, 1, 3.04272909e-08, -0.967323601, -6.5768397e-08, 0.253544956)
+		    CFM = CFrame.new(494.66625976563, 39.190235137939, 2414.1376953125)
+		elseif MyLevel == 725 or MyLevel <= 774 then -- Mercenary [Lv. 725]
+			NAMEMON = "Mercenary [Lv. 725]"
+			NAMEQUEST = "Area1Quest"
+			NUMBERQUEST = 2
+			CFQUEST = CFrame.new(-424.080078, 73.0055847, 1836.91589, 0.253544956, -1.42165932e-08, 0.967323601, -6.00147771e-08, 1, 3.04272909e-08, -0.967323601, -6.5768397e-08, 0.253544956)
+	CFM = CFrame.new(-1074.8765869141, 72.985496520996, 1718.7181396484)
+		elseif MyLevel == 775 or MyLevel <= 799 then -- Swan Pirate [Lv. 775]
+			NAMEMON = "Swan Pirate [Lv. 775]"
+			NAMEQUEST = "Area2Quest"
+			NUMBERQUEST = 1
+			CFQUEST = CFrame.new(632.698608, 73.1055908, 918.666321, -0.0319722369, 8.96074881e-10, -0.999488771, 1.36326533e-10, 1, 8.92172336e-10, 0.999488771, -1.07732087e-10, -0.0319722369)
+	CFM = CFrame.new(961.08502197266, 72.985496520996, 1265.6494140625)	
+		elseif MyLevel == 800 or MyLevel <= 874 then -- Factory Staff [Lv. 800]
+			NAMEMON = "Factory Staff [Lv. 800]"
+			NAMEQUEST = "Area2Quest"
+			NUMBERQUEST = 2
+			CFQUEST = CFrame.new(632.698608, 73.1055908, 918.666321, -0.0319722369, 8.96074881e-10, -0.999488771, 1.36326533e-10, 1, 8.92172336e-10, 0.999488771, -1.07732087e-10, -0.0319722369)
+	CFM = CFrame.new(682.81823730469, 72.985557556152, 81.800216674805)	
+		elseif MyLevel == 875 or MyLevel <= 899 then -- Marine Lieutenant [Lv. 875]
+			NAMEMON = "Marine Lieutenant [Lv. 875]"
+			NAMEQUEST = "MarineQuest3"
+			NUMBERQUEST = 1
+			CFQUEST = CFrame.new(-2442.65015, 73.0511475, -3219.11523, -0.873540044, 4.2329841e-08, -0.486752301, 5.64383384e-08, 1, -1.43220786e-08, 0.486752301, -3.99823996e-08, -0.873540044)
+	CFM = CFrame.new(-3011.70703125, 72.991920471191, -3053.748046875)	
+		elseif MyLevel == 900 or MyLevel <= 949 then -- Marine Captain [Lv. 900]
+			NAMEMON = "Marine Captain [Lv. 900]"
+			NAMEQUEST = "MarineQuest3"
+			NUMBERQUEST = 2
+			CFQUEST = CFrame.new(-2442.65015, 73.0511475, -3219.11523, -0.873540044, 4.2329841e-08, -0.486752301, 5.64383384e-08, 1, -1.43220786e-08, 0.486752301, -3.99823996e-08, -0.873540044)
+		CFM = CFrame.new(-1954.5085449219, 72.991920471191, -3312.5073242188)	
+		elseif MyLevel == 950 or MyLevel <= 974 then -- Zombie [Lv. 950]
+			NAMEMON = "Zombie [Lv. 950]"
+			NAMEQUEST = "ZombieQuest"
+			NUMBERQUEST = 1
+			CFQUEST = CFrame.new(-5492.79395, 48.5151672, -793.710571, 0.321800292, -6.24695815e-08, 0.946807742, 4.05616092e-08, 1, 5.21931227e-08, -0.946807742, 2.16082796e-08, 0.321800292)
+		CFM = CFrame.new(-5788.7905273438, 48.505920410156, -729.82867431641)
+		elseif MyLevel == 975 or MyLevel <= 999 then -- Vampire [Lv. 975]
+			NAMEMON = "Vampire [Lv. 975]"
+			NAMEQUEST = "ZombieQuest"
+			NUMBERQUEST = 2
+			CFQUEST = CFrame.new(-5492.79395, 48.5151672, -793.710571, 0.321800292, -6.24695815e-08, 0.946807742, 4.05616092e-08, 1, 5.21931227e-08, -0.946807742, 2.16082796e-08, 0.321800292)
+			CFM = CFrame.new(-5904.4921875, 6.4285039901733, -1538.5247802734)
+		elseif MyLevel == 1000 or MyLevel <= 1049 then -- Snow Trooper [Lv. 1000] **
+			NAMEMON = "Snow Trooper [Lv. 1000]"
+			NAMEQUEST = "SnowMountainQuest"
+			NUMBERQUEST = 1
+			CFQUEST = CFrame.new(604.964966, 401.457062, -5371.69287, 0.353063971, 1.89520435e-08, -0.935599446, -5.81846002e-08, 1, -1.70033754e-09, 0.935599446, 5.50377841e-08, 0.353063971)
+		CFM = CFrame.new(663.18353271484, 401.44775390625, -5579.4326171875)
+		elseif MyLevel == 1050 or MyLevel <= 1099 then -- Winter Warrior [Lv. 1050]
+			NAMEMON = "Winter Warrior [Lv. 1050]"
+			NAMEQUEST = "SnowMountainQuest"
+			NUMBERQUEST = 2
+			CFQUEST = CFrame.new(604.964966, 401.457062, -5371.69287, 0.353063971, 1.89520435e-08, -0.935599446, -5.81846002e-08, 1, -1.70033754e-09, 0.935599446, 5.50377841e-08, 0.353063971)
+		    CFM = CFrame.new(1180.9495849609, 429.44769287109, -5129.2416992188)
+		elseif MyLevel == 1100 or MyLevel <= 1124 then -- Lab Subordinate [Lv. 1100]
+			NAMEMON = "Lab Subordinate [Lv. 1100]"
+			NAMEQUEST = "IceSideQuest"
+			NUMBERQUEST = 1
+			CFQUEST = CFrame.new(-6060.10693, 15.9868021, -4904.7876, -0.411000341, -5.06538868e-07, 0.91163528, 1.26306062e-07, 1, 6.12581289e-07, -0.91163528, 3.66916197e-07, -0.411000341)
+	        CFM = CFrame.new(-5775.3940429688, 15.977563858032, -4414.900390625)
+		elseif MyLevel == 1125 or MyLevel <= 1174 then -- Horned Warrior [Lv. 1125]
+			NAMEMON = "Horned Warrior [Lv. 1125]"
+			NAMEQUEST = "IceSideQuest"
+			NUMBERQUEST = 2
+			CFQUEST = CFrame.new(-6060.10693, 15.9868021, -4904.7876, -0.411000341, -5.06538868e-07, 0.91163528, 1.26306062e-07, 1, 6.12581289e-07, -0.91163528, 3.66916197e-07, -0.411000341)
+		 CFM = CFrame.new(-6407.8774414063, 15.977563858032, -5766.3447265625)
+		elseif MyLevel == 1175 or MyLevel <= 1199 then -- Magma Ninja [Lv. 1175]
+			NAMEMON = "Magma Ninja [Lv. 1175]"
+			NAMEQUEST = "FireSideQuest"
+			NUMBERQUEST = 1
+			CFQUEST = CFrame.new(-5431.09473, 15.9868021, -5296.53223, 0.831796765, 1.15322464e-07, -0.555080295, -1.10814341e-07, 1, 4.17010995e-08, 0.555080295, 2.68240168e-08, 0.831796765)
+	    CFM = CFrame.new(-5746.9580078125, 15.977563858032, -5841.1450195313)
+		elseif MyLevel == 1200 or MyLevel <= 1249 then -- Lava Pirate [Lv. 1200]
+			NAMEMON = "Lava Pirate [Lv. 1200]"
+			NAMEQUEST = "FireSideQuest"
+			NUMBERQUEST = 2
+			CFQUEST = CFrame.new(-5431.09473, 15.9868021, -5296.53223, 0.831796765, 1.15322464e-07, -0.555080295, -1.10814341e-07, 1, 4.17010995e-08, 0.555080295, 2.68240168e-08, 0.831796765)
+		CFM = CFrame.new(-5325.6474609375, 15.977563858032, -4608.2734375)
+		elseif MyLevel == 1250 or MyLevel <= 1274 then -- Ship Deckhand [Lv. 1250]
+			NAMEMON = "Ship Deckhand [Lv. 1250]"
+			NAMEQUEST = "ShipQuest1"
+			NUMBERQUEST = 1
+			CFQUEST = CFrame.new(1037.80127, 125.092171, 32911.6016, -0.244533166, -0, -0.969640911, -0, 1.00000012, -0, 0.96964103, 0, -0.244533136)
+		CFM = CFrame.new(1215.5532226563, 125.75492095947, 33020.29296875)
+		elseif MyLevel == 1275 or MyLevel <= 1299 then -- Ship Engineer [Lv. 1275]
+			NAMEMON = "Ship Engineer [Lv. 1275]"
+			NAMEQUEST = "ShipQuest1"
+			NUMBERQUEST = 2
+			CFQUEST = CFrame.new(1037.80127, 125.092171, 32911.6016, -0.244533166, -0, -0.969640911, -0, 1.00000012, -0, 0.96964103, 0, -0.244533136)
+		CFM = CFrame.new(1008.5737304688, 40.46866607666, 32976.640625)
+		elseif MyLevel == 1300 or MyLevel <= 1324 then -- Ship Steward [Lv. 1300]
+			NAMEMON = "Ship Steward [Lv. 1300]"
+			NAMEQUEST = "ShipQuest2"
+			NUMBERQUEST = 1
+			CFQUEST = CFrame.new(968.80957, 125.092171, 33244.125, -0.869560242, 1.51905191e-08, -0.493826836, 1.44108379e-08, 1, 5.38534195e-09, 0.493826836, -2.43357912e-09, -0.869560242)
+		CFM = CFrame.new(917.12353515625, 125.21258544922, 33370.078125)
+		elseif MyLevel == 1325 or MyLevel <= 1349 then -- Ship Officer [Lv. 1325]
+			NAMEMON = "Ship Officer [Lv. 1325]"
+			NAMEQUEST = "ShipQuest2"
+			NUMBERQUEST = 2
+			CFQUEST = CFrame.new(968.80957, 125.092171, 33244.125, -0.869560242, 1.51905191e-08, -0.493826836, 1.44108379e-08, 1, 5.38534195e-09, 0.493826836, -2.43357912e-09, -0.869560242)
+		CFM = CFrame.new(609.07312011719, 181.17491149902, 33285.375)
+		elseif MyLevel == 1350 or MyLevel <= 1374 then -- Arctic Warrior [Lv. 1350]
+			NAMEMON = "Arctic Warrior [Lv. 1350]"
+			NAMEQUEST = "FrostQuest"
+			NUMBERQUEST = 1
+			CFQUEST = CFrame.new(5669.43506, 28.2117786, -6482.60107, 0.888092756, 1.02705066e-07, 0.459664226, -6.20391774e-08, 1, -1.03572376e-07, -0.459664226, 6.34646895e-08, 0.888092756)
+		CFM = CFrame.new(6144.0493164063, 28.392677307129, -6219.2915039063)
+		elseif MyLevel == 1375 or MyLevel <= 1424 then -- Snow Lurker [Lv. 1375]
+			NAMEMON = "Snow Lurker [Lv. 1375]"
+			NAMEQUEST = "FrostQuest"
+			NUMBERQUEST = 2
+			CFQUEST = CFrame.new(5669.43506, 28.2117786, -6482.60107, 0.888092756, 1.02705066e-07, 0.459664226, -6.20391774e-08, 1, -1.03572376e-07, -0.459664226, 6.34646895e-08, 0.888092756)
+		CFM = CFrame.new(5576.0317382813, 28.705900192261, -6754.0327148438)
+		elseif MyLevel == 1425 or MyLevel <= 1449 then -- Sea Soldier [Lv. 1425]
+			NAMEMON = "Sea Soldier [Lv. 1425]"
+			NAMEQUEST = "ForgottenQuest"
+			NUMBERQUEST = 1
+			CFQUEST = CFrame.new(-3052.99097, 236.881363, -10148.1943, -0.997911751, 4.42321983e-08, 0.064591676, 4.90968759e-08, 1, 7.37270085e-08, -0.064591676, 7.67442998e-08, -0.997911751)
+		CFM = CFrame.new(-3409.9125976563, 26.973028182983, -9812.041015625)
+		elseif MyLevel >= 1450 then -- Water Fighter [Lv. 1450]
+			NAMEMON = "Water Fighter [Lv. 1450]"
+			NAMEQUEST = "ForgottenQuest"
+			NUMBERQUEST = 2
+			CFQUEST = CFrame.new(-3052.99097, 236.881363, -10148.1943, -0.997911751, 4.42321983e-08, 0.064591676, 4.90968759e-08, 1, 7.37270085e-08, -0.064591676, 7.67442998e-08, -0.997911751)
+	        CFM = CFrame.new(-3513.6782226563, 239.09613037109, -10507.831054688)
+		end
+    pcall(function()
+    function takequest()
+    local A_1 = "StartQuest"
+    local A_2 = NAMEQUEST
+    local A_3 = NUMBERQUEST
+    local Event = game:GetService("ReplicatedStorage").Remotes["CommF_"]
+    Event:InvokeServer(A_1, A_2, A_3)
+    wait()
+    end
+    if game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == true then
+        
+    else
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFQUEST
+    takequest()
+    end
+    
+    game.Players.LocalPlayer.Character.Humanoid:ChangeState(11)
+    
+    
+    for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+    if v.Name == NAMEMON then
+        
+    if v.Humanoid.Health == 0 or game.Players.LocalPlayer.Character.Humanoid.Health == 0 then
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFQUEST
+    
+    else
+         EquipWeapon(SelectWeapon)
+        sethiddenproperty(game.Players.LocalPlayer, "SimulationRadius", math.huge)
+        v.HumanoidRootPart.CanCollide = false
+         v.HumanoidRootPart.CFrame = CFM
+        v.HumanoidRootPart.Size = Vector3.new(30,30,30)
+        v.Humanoid:ChangeState(11)
+    v.HumanoidRootPart.Transparency = 1
+    game:GetService'VirtualUser':CaptureController()
+    game:GetService'VirtualUser':Button1Down(Vector2.new(31, 123))
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.HumanoidRootPart.CFrame * CFrame.new(0,20,0)
+        
+    end
+    end
+    end
+    end)
+    end
+    
+    -- Farm no bring
+     function ANQuest()
+        local MyLevel = game:GetService("Players").LocalPlayer.Data.Level.Value
+        if MyLevel == 700 or MyLevel <= 724 then -- Raider [Lv. 700]
+			NAMEMON = "Raider [Lv. 700]"
+			NAMEQUEST = "Area1Quest"
+			NUMBERQUEST = 1
+			CFQUEST = CFrame.new(-424.080078, 73.0055847, 1836.91589, 0.253544956, -1.42165932e-08, 0.967323601, -6.00147771e-08, 1, 3.04272909e-08, -0.967323601, -6.5768397e-08, 0.253544956)
+		elseif MyLevel == 725 or MyLevel <= 774 then -- Mercenary [Lv. 725]
+			NAMEMON = "Mercenary [Lv. 725]"
+			NAMEQUEST = "Area1Quest"
+			NUMBERQUEST = 2
+			CFQUEST = CFrame.new(-424.080078, 73.0055847, 1836.91589, 0.253544956, -1.42165932e-08, 0.967323601, -6.00147771e-08, 1, 3.04272909e-08, -0.967323601, -6.5768397e-08, 0.253544956)
+		elseif MyLevel == 775 or MyLevel <= 799 then -- Swan Pirate [Lv. 775]
+			NAMEMON = "Swan Pirate [Lv. 775]"
+			NAMEQUEST = "Area2Quest"
+			NUMBERQUEST = 1
+			CFQUEST = CFrame.new(632.698608, 73.1055908, 918.666321, -0.0319722369, 8.96074881e-10, -0.999488771, 1.36326533e-10, 1, 8.92172336e-10, 0.999488771, -1.07732087e-10, -0.0319722369)
+		elseif MyLevel == 800 or MyLevel <= 874 then -- Factory Staff [Lv. 800]
+			NAMEMON = "Factory Staff [Lv. 800]"
+			NAMEQUEST = "Area2Quest"
+			NUMBERQUEST = 2
+			CFQUEST = CFrame.new(632.698608, 73.1055908, 918.666321, -0.0319722369, 8.96074881e-10, -0.999488771, 1.36326533e-10, 1, 8.92172336e-10, 0.999488771, -1.07732087e-10, -0.0319722369)
+		elseif MyLevel == 875 or MyLevel <= 899 then -- Marine Lieutenant [Lv. 875]
+			NAMEMON = "Marine Lieutenant [Lv. 875]"
+			NAMEQUEST = "MarineQuest3"
+			NUMBERQUEST = 1
+			CFQUEST = CFrame.new(-2442.65015, 73.0511475, -3219.11523, -0.873540044, 4.2329841e-08, -0.486752301, 5.64383384e-08, 1, -1.43220786e-08, 0.486752301, -3.99823996e-08, -0.873540044)
+		elseif MyLevel == 900 or MyLevel <= 949 then -- Marine Captain [Lv. 900]
+			NAMEMON = "Marine Captain [Lv. 900]"
+			NAMEQUEST = "MarineQuest3"
+			NUMBERQUEST = 2
+			CFQUEST = CFrame.new(-2442.65015, 73.0511475, -3219.11523, -0.873540044, 4.2329841e-08, -0.486752301, 5.64383384e-08, 1, -1.43220786e-08, 0.486752301, -3.99823996e-08, -0.873540044)
+		elseif MyLevel == 950 or MyLevel <= 974 then -- Zombie [Lv. 950]
+			NAMEMON = "Zombie [Lv. 950]"
+			NAMEQUEST = "ZombieQuest"
+			NUMBERQUEST = 1
+			CFQUEST = CFrame.new(-5492.79395, 48.5151672, -793.710571, 0.321800292, -6.24695815e-08, 0.946807742, 4.05616092e-08, 1, 5.21931227e-08, -0.946807742, 2.16082796e-08, 0.321800292)
+		elseif MyLevel == 975 or MyLevel <= 999 then -- Vampire [Lv. 975]
+			NAMEMON = "Vampire [Lv. 975]"
+			NAMEQUEST = "ZombieQuest"
+			NUMBERQUEST = 2
+			CFQUEST = CFrame.new(-5492.79395, 48.5151672, -793.710571, 0.321800292, -6.24695815e-08, 0.946807742, 4.05616092e-08, 1, 5.21931227e-08, -0.946807742, 2.16082796e-08, 0.321800292)
+		elseif MyLevel == 1000 or MyLevel <= 1049 then -- Snow Trooper [Lv. 1000] **
+			NAMEMON = "Snow Trooper [Lv. 1000]"
+			NAMEQUEST = "SnowMountainQuest"
+			NUMBERQUEST = 1
+			CFQUEST = CFrame.new(604.964966, 401.457062, -5371.69287, 0.353063971, 1.89520435e-08, -0.935599446, -5.81846002e-08, 1, -1.70033754e-09, 0.935599446, 5.50377841e-08, 0.353063971)
+		elseif MyLevel == 1050 or MyLevel <= 1099 then -- Winter Warrior [Lv. 1050]
+			NAMEMON = "Winter Warrior [Lv. 1050]"
+			NAMEQUEST = "SnowMountainQuest"
+			NUMBERQUEST = 2
+			CFQUEST = CFrame.new(604.964966, 401.457062, -5371.69287, 0.353063971, 1.89520435e-08, -0.935599446, -5.81846002e-08, 1, -1.70033754e-09, 0.935599446, 5.50377841e-08, 0.353063971)
+		elseif MyLevel == 1100 or MyLevel <= 1124 then -- Lab Subordinate [Lv. 1100]
+			NAMEMON = "Lab Subordinate [Lv. 1100]"
+			NAMEQUEST = "IceSideQuest"
+			NUMBERQUEST = 1
+			CFQUEST = CFrame.new(-6060.10693, 15.9868021, -4904.7876, -0.411000341, -5.06538868e-07, 0.91163528, 1.26306062e-07, 1, 6.12581289e-07, -0.91163528, 3.66916197e-07, -0.411000341)
+		elseif MyLevel == 1125 or MyLevel <= 1174 then -- Horned Warrior [Lv. 1125]
+			NAMEMON = "Horned Warrior [Lv. 1125]"
+			NAMEQUEST = "IceSideQuest"
+			NUMBERQUEST = 2
+			CFQUEST = CFrame.new(-6060.10693, 15.9868021, -4904.7876, -0.411000341, -5.06538868e-07, 0.91163528, 1.26306062e-07, 1, 6.12581289e-07, -0.91163528, 3.66916197e-07, -0.411000341)
+		elseif MyLevel == 1175 or MyLevel <= 1199 then -- Magma Ninja [Lv. 1175]
+			NAMEMON = "Magma Ninja [Lv. 1175]"
+			NAMEQUEST = "FireSideQuest"
+			NUMBERQUEST = 1
+			CFQUEST = CFrame.new(-5431.09473, 15.9868021, -5296.53223, 0.831796765, 1.15322464e-07, -0.555080295, -1.10814341e-07, 1, 4.17010995e-08, 0.555080295, 2.68240168e-08, 0.831796765)
+		elseif MyLevel == 1200 or MyLevel <= 1249 then -- Lava Pirate [Lv. 1200]
+			NAMEMON = "Lava Pirate [Lv. 1200]"
+			NAMEQUEST = "FireSideQuest"
+			NUMBERQUEST = 2
+			CFQUEST = CFrame.new(-5431.09473, 15.9868021, -5296.53223, 0.831796765, 1.15322464e-07, -0.555080295, -1.10814341e-07, 1, 4.17010995e-08, 0.555080295, 2.68240168e-08, 0.831796765)
+		elseif MyLevel == 1250 or MyLevel <= 1274 then -- Ship Deckhand [Lv. 1250]
+			NAMEMON = "Ship Deckhand [Lv. 1250]"
+			NAMEQUEST = "ShipQuest1"
+			NUMBERQUEST = 1
+			CFQUEST = CFrame.new(1037.80127, 125.092171, 32911.6016, -0.244533166, -0, -0.969640911, -0, 1.00000012, -0, 0.96964103, 0, -0.244533136)
+		elseif MyLevel == 1275 or MyLevel <= 1299 then -- Ship Engineer [Lv. 1275]
+			NAMEMON = "Ship Engineer [Lv. 1275]"
+			NAMEQUEST = "ShipQuest1"
+			NUMBERQUEST = 2
+			CFQUEST = CFrame.new(1037.80127, 125.092171, 32911.6016, -0.244533166, -0, -0.969640911, -0, 1.00000012, -0, 0.96964103, 0, -0.244533136)
+		elseif MyLevel == 1300 or MyLevel <= 1324 then -- Ship Steward [Lv. 1300]
+			NAMEMON = "Ship Steward [Lv. 1300]"
+			NAMEQUEST = "ShipQuest2"
+			NUMBERQUEST = 1
+			CFQUEST = CFrame.new(968.80957, 125.092171, 33244.125, -0.869560242, 1.51905191e-08, -0.493826836, 1.44108379e-08, 1, 5.38534195e-09, 0.493826836, -2.43357912e-09, -0.869560242)
+		elseif MyLevel == 1325 or MyLevel <= 1349 then -- Ship Officer [Lv. 1325]
+			NAMEMON = "Ship Officer [Lv. 1325]"
+			NAMEQUEST = "ShipQuest2"
+			NUMBERQUEST = 2
+			CFQUEST = CFrame.new(968.80957, 125.092171, 33244.125, -0.869560242, 1.51905191e-08, -0.493826836, 1.44108379e-08, 1, 5.38534195e-09, 0.493826836, -2.43357912e-09, -0.869560242)
+		elseif MyLevel == 1350 or MyLevel <= 1374 then -- Arctic Warrior [Lv. 1350]
+			NAMEMON = "Arctic Warrior [Lv. 1350]"
+			NAMEQUEST = "FrostQuest"
+			NUMBERQUEST = 1
+			CFQUEST = CFrame.new(5669.43506, 28.2117786, -6482.60107, 0.888092756, 1.02705066e-07, 0.459664226, -6.20391774e-08, 1, -1.03572376e-07, -0.459664226, 6.34646895e-08, 0.888092756)
+		elseif MyLevel == 1375 or MyLevel <= 1424 then -- Snow Lurker [Lv. 1375]
+			NAMEMON = "Snow Lurker [Lv. 1375]"
+			NAMEQUEST = "FrostQuest"
+			NUMBERQUEST = 2
+			CFQUEST = CFrame.new(5669.43506, 28.2117786, -6482.60107, 0.888092756, 1.02705066e-07, 0.459664226, -6.20391774e-08, 1, -1.03572376e-07, -0.459664226, 6.34646895e-08, 0.888092756)
+		elseif MyLevel == 1425 or MyLevel <= 1449 then -- Sea Soldier [Lv. 1425]
+			NAMEMON = "Sea Soldier [Lv. 1425]"
+			NAMEQUEST = "ForgottenQuest"
+			NUMBERQUEST = 1
+			CFQUEST = CFrame.new(-3052.99097, 236.881363, -10148.1943, -0.997911751, 4.42321983e-08, 0.064591676, 4.90968759e-08, 1, 7.37270085e-08, -0.064591676, 7.67442998e-08, -0.997911751)
+		elseif MyLevel >= 1450 then -- Water Fighter [Lv. 1450]
+			NAMEMON = "Water Fighter [Lv. 1450]"
+			NAMEQUEST = "ForgottenQuest"
+			NUMBERQUEST = 2
+			CFQUEST = CFrame.new(-3052.99097, 236.881363, -10148.1943, -0.997911751, 4.42321983e-08, 0.064591676, 4.90968759e-08, 1, 7.37270085e-08, -0.064591676, 7.67442998e-08, -0.997911751)
+		end
+    pcall(function()
+    function takequest()
+    local A_1 = "StartQuest"
+    local A_2 = NAMEQUEST
+    local A_3 = NUMBERQUEST
+    local Event = game:GetService("ReplicatedStorage").Remotes["CommF_"]
+    Event:InvokeServer(A_1, A_2, A_3)
+    wait()
+    end
+    if game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == true then
+        
+    else
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFQUEST
+    takequest()
+    end
+    
+    game.Players.LocalPlayer.Character.Humanoid:ChangeState(11)
+    
+    
+    for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+    if v.Name == NAMEMON then
+        
+    if v.Humanoid.Health == 0 or game.Players.LocalPlayer.Character.Humanoid.Health == 0 then
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFQUEST
+    
+    else
+        EquipWeapon(SelectWeapon)
+        v.HumanoidRootPart.CanCollide = false
+        v.HumanoidRootPart.Size = Vector3.new(60,60,60)
+        v.Humanoid:ChangeState(11)
+    v.HumanoidRootPart.Transparency = 1
+    game:GetService'VirtualUser':CaptureController()
+    game:GetService'VirtualUser':Button1Down(Vector2.new(31, 123))
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.HumanoidRootPart.CFrame * CFrame.new(0,20,0)
+        
+    end
+    end
+    end
+    end)
+    end
+    
+     tgls:Toggle("AutoFarm-ธรรมม้ะดา",false, function(value)
+    shared.Nruh = value
+    local args = {
+                    [1] = "AbandonQuest"
+                }
+                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+                local args = {
+                    [1] = "AbandonQuest"
+                }
+                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+
+local args = {
+    [1] = "Buso"
+}
+
+game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+if game.Players.LocalPlayer.Character.Humanoid.Health <= 0 then
+
+local args = {
+    [1] = "Buso"
+}
+
+game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+end
+    end)
+    spawn(function()
+    while wait() do
+    if shared.Nruh then
+    ANQuest()
+    wait()
+    end
+    end
+    end)
+    
+    tgls:Toggle("AutoFarm-Bring",false, function(value)
+    shared.NBruh = value
+    local args = {
+                    [1] = "AbandonQuest"
+                }
+                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+                local args = {
+                    [1] = "AbandonQuest"
+                }
+                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+
+local args = {
+    [1] = "Buso"
+}
+
+game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+if game.Players.LocalPlayer.Character.Humanoid.Health <= 0 then
+
+local args = {
+    [1] = "Buso"
+}
+
+game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+end
+    end)
+    spawn(function()
+    while wait() do
+    if shared.NBruh then
+    NQuest()
+    wait()
+    end
+    end
+    end)
+    
+    tgls:Toggle("AutoSuperHuman",false, function(value)
+    Superhuman = value
+                while Superhuman do wait()
+                    if Superhuman then
+                        if game.Players.LocalPlayer.Backpack:FindFirstChild("Combat") or game.Players.LocalPlayer.Character:FindFirstChild("Combat") then
+                            local args = {
+                                [1] = "BuyBlackLeg"
+                            }
+                            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+                        end   
+                        if game.Players.LocalPlayer.Character:FindFirstChild("Superhuman") or game.Players.LocalPlayer.Backpack:FindFirstChild("Superhuman") then
+                           local SPHUMAN = "Superhuman"
+if game.Players.LocalPlayer.Backpack:FindFirstChild(SPHUMAN) then
+      local tool = game.Players.LocalPlayer.Backpack:FindFirstChild(SPHUMAN)
+      wait(.4)
+      game.Players.LocalPlayer.Character.Humanoid:EquipTool(tool)
+end
+                        end  
+                        if game.Players.LocalPlayer.Backpack:FindFirstChild("Black Leg") or game.Players.LocalPlayer.Character:FindFirstChild("Black Leg") or game.Players.LocalPlayer.Backpack:FindFirstChild("Electro") or game.Players.LocalPlayer.Character:FindFirstChild("Electro") or game.Players.LocalPlayer.Backpack:FindFirstChild("Fishman Karate") or game.Players.LocalPlayer.Character:FindFirstChild("Fishman Karate") or game.Players.LocalPlayer.Backpack:FindFirstChild("Dragon Claw") or game.Players.LocalPlayer.Character:FindFirstChild("Dragon Claw") then
+                            if game.Players.LocalPlayer.Backpack:FindFirstChild("Black Leg") and game.Players.LocalPlayer.Backpack:FindFirstChild("Black Leg").Level.Value <= 299 then
+                                local BLLEG = "Black Leg"
+if game.Players.LocalPlayer.Backpack:FindFirstChild(BLLEG) then
+      local tool = game.Players.LocalPlayer.Backpack:FindFirstChild(BLLEG)
+      wait(.4)
+      game.Players.LocalPlayer.Character.Humanoid:EquipTool(tool)
+end
+                            end
+                            if game.Players.LocalPlayer.Backpack:FindFirstChild("Electro") and game.Players.LocalPlayer.Backpack:FindFirstChild("Electro").Level.Value <= 299 then
+                                 local ELTRO = "Electro"
+if game.Players.LocalPlayer.Backpack:FindFirstChild(ELTRO) then
+      local tool = game.Players.LocalPlayer.Backpack:FindFirstChild(ELTRO)
+      wait(.4)
+      game.Players.LocalPlayer.Character.Humanoid:EquipTool(tool)
+end
+                            end
+                            if game.Players.LocalPlayer.Backpack:FindFirstChild("Fishman Karate") and game.Players.LocalPlayer.Backpack:FindFirstChild("Fishman Karate").Level.Value <= 299 then
+                                local FKARATE = "Fishman Karate"
+if game.Players.LocalPlayer.Backpack:FindFirstChild(FKARATE) then
+      local tool = game.Players.LocalPlayer.Backpack:FindFirstChild(FKARATE)
+      wait(.4)
+      game.Players.LocalPlayer.Character.Humanoid:EquipTool(tool)
+end
+                            end
+                            if game.Players.LocalPlayer.Backpack:FindFirstChild("Dragon Claw") and game.Players.LocalPlayer.Backpack:FindFirstChild("Dragon Claw").Level.Value <= 299 then
+                                local DGCLAW = "Dragon Claw"
+if game.Players.LocalPlayer.Backpack:FindFirstChild(DGCLAW) then
+      local tool = game.Players.LocalPlayer.Backpack:FindFirstChild(DGCLAW)
+      wait(.4)
+      game.Players.LocalPlayer.Character.Humanoid:EquipTool(tool)
+end
+                            end
+                            if game.Players.LocalPlayer.Backpack:FindFirstChild("Black Leg") and game.Players.LocalPlayer.Backpack:FindFirstChild("Black Leg").Level.Value >= 300 then
+                                local args = {
+                                    [1] = "BuyElectro"
+                                }
+                                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+                            end
+                            if game.Players.LocalPlayer.Character:FindFirstChild("Black Leg") and game.Players.LocalPlayer.Character:FindFirstChild("Black Leg").Level.Value >= 300 then
+                                local args = {
+                                    [1] = "BuyElectro"
+                                }
+                                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+                            end
+                            if game.Players.LocalPlayer.Backpack:FindFirstChild("Electro") and game.Players.LocalPlayer.Backpack:FindFirstChild("Electro").Level.Value >= 300 then
+                                local args = {
+                                    [1] = "BuyFishmanKarate"
+                                }
+                                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+                            end
+                            if game.Players.LocalPlayer.Character:FindFirstChild("Electro") and game.Players.LocalPlayer.Character:FindFirstChild("Electro").Level.Value >= 300 then
+                                local args = {
+                                    [1] = "BuyFishmanKarate"
+                                }
+                                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+                            end
+                            if game.Players.LocalPlayer.Backpack:FindFirstChild("Fishman Karate") and game.Players.LocalPlayer.Backpack:FindFirstChild("Fishman Karate").Level.Value >= 300 then
+                                local args = {
+                                    [1] = "BlackbeardReward",
+                                    [2] = "DragonClaw",
+                                    [3] = "1"
+                                }
+                                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+                                local args = {
+                                    [1] = "BlackbeardReward",
+                                    [2] = "DragonClaw",
+                                    [3] = "2"
+                                }
+                                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args)) 
+                            end
+                            if game.Players.LocalPlayer.Character:FindFirstChild("Fishman Karate") and game.Players.LocalPlayer.Character:FindFirstChild("Fishman Karate").Level.Value >= 300 then
+                                local args = {
+                                    [1] = "BlackbeardReward",
+                                    [2] = "DragonClaw",
+                                    [3] = "1"
+                                }
+                                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+                                local args = {
+                                    [1] = "BlackbeardReward",
+                                    [2] = "DragonClaw",
+                                    [3] = "2"
+                                }
+                                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args)) 
+                            end
+                            if game.Players.LocalPlayer.Backpack:FindFirstChild("Dragon Claw") and game.Players.LocalPlayer.Backpack:FindFirstChild("Dragon Claw").Level.Value >= 300 then
+                                local args = {
+                                    [1] = "BuySuperhuman"
+                                }
+                                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+                            end
+                            if game.Players.LocalPlayer.Character:FindFirstChild("Dragon Claw") and game.Players.LocalPlayer.Character:FindFirstChild("Dragon Claw").Level.Value >= 300 then
+                                local args = {
+                                    [1] = "BuySuperhuman"
+                                }
+                                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+                            end 
+                        end
+                    end
+                end
+    end)
+   tgls:Toggle("AutoDeathStep",false, function(value)
+    DeathStep = value
+                while DeathStep do wait()
+                    if DeathStep then
+                            local args = {
+                                [1] = "BuyBlackLeg"
+                            }
+                            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+                        
+                            if game.Players.LocalPlayer.Backpack:FindFirstChild("Black Leg") and game.Players.LocalPlayer.Backpack:FindFirstChild("Black Leg").Level.Value <= 449  then
+                                local BLLEG = "Black Leg"
+if game.Players.LocalPlayer.Backpack:FindFirstChild(BLLEG) then
+      local tool = game.Players.LocalPlayer.Backpack:FindFirstChild(BLLEG)
+      wait(.4)
+      game.Players.LocalPlayer.Character.Humanoid:EquipTool(tool)
+end
+                      if game.Players.LocalPlayer.Backpack:FindFirstChild("Black Leg") and game.Players.LocalPlayer.Backpack:FindFirstChild("Black Leg").Level.Value >= 450  then
+
+local args = {
+    [1] = "BuyDeathStep",
+    [2] = true
+}
+
+game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+
+                      end
+                end
+                end
+                    end
+        end)
+    tgls:Seperator()
+    tgls:Button("KillAura", function()
+        local Kill = game:GetService("Workspace").Enemies:GetChildren()
+    for i,v in pairs(Kill) do
+        if v.Name == "Raider [Lv. 700]"then
+        v.Humanoid.Health = 0
+        v.HumanoidRootPart.Size = Vector3.new(60,60,60)
+        v.HumanoidRootPart.Transparency = 0.5
+        end
+        end
+    end)
+    
+    
+        
+        
+    local M = serv:Channel("AutoStat")
+    
+    M:Toggle("Melee",false, function(Value)
+        _G.A = Value
+    while _G.A do wait()
+    local args = {
+        [1] = "AddPoint",
+        [2] = "Melee",
+        [3] = 1
+    }
+    
+    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+    wait()
+    end
+    end)
+    
+    
+        
+          M:Toggle("Defense",false, function(Value)
+       _G.A = Value
+    while _G.A do wait()
+    local args = {
+        [1] = "AddPoint",
+        [2] = "Defense",
+        [3] = 1
+    }
+    
+    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+    wait()
+    end
+    end)
+    
+        M:Toggle("Sword",false, function(Value)
+        __G.A = Value
+    while _G.A do wait()
+    local args = {
+        [1] = "AddPoint",
+        [2] = "Sword",
+        [3] = 1
+    }
+    
+    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+    wait()
+    end
+    end)
+    
+      M:Toggle("Gun",false, function(Value)
+    _G.A = Value
+    while _G.A do wait()
+    local args = {
+        [1] = "AddPoint",
+        [2] = "Gun",
+        [3] = 1
+    }
+    
+    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+    wait()
+    end
+    end)
+    
+    
+     M:Toggle("Blox Fruits",false, function(Value)
+    _G.A = Value
+    while _G.A do wait()
+    local args = {
+        [1] = "AddPoint",
+        [2] = "Demon Fruit",
+        [3] = 1
+    }
+    
+    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+    wait()
+    end
+    end)
+    
+    
+    local P = serv:Channel("Player")
+    
+    local sldr = P:Slider("WalkSpeed", 0, 500, 16, function(t)
+        game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = t
+        end)
+    P:Seperator()
+        local sldr = P:Slider("JumpPower", 0, 500, 30, function(t)
+            game.Players.LocalPlayer.Character.Humanoid.JumpPower = t
+            end)
+    
+    local T = serv:Channel("TeleportIsland")
+    
+   T:Button("GreenZone", function()
+ game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-2347.3283691406, 130.04588317871, -3167.0085449219)
+end)
+T:Button("UsoppIsland", function()
+ game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(4736.2006835938, 19.268676757813, 2901.2331542969)
+end)
+T:Button("GraveyardIsland", function()
+ game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-5817.3208007813, 16.886863708496, -1230.2858886719)
+end)
+T:Button("SnowMoutain", function()
+ game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(306.587890625, 412.76773071289, -5442.6484375)
+end)
+T:Button("SnowMoutain", function()
+ game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(306.587890625, 412.76773071289, -5442.6484375)
+end)
+T:Button("KingdomOfRose", function()
+ game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(238.48764038086, 94.764801025391, 1900.5590820313)
+end)
+T:Button("HotAndColdIsland", function()
+ game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-5551.3232421875, 101.7767868042, -5300.9453125)
+end)
+T:Button("CursedShip-In", function()
+ game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(919.94049072266, 152.79470825195, 32876.4140625)
+end)
+T:Button("CurseShip-Out", function()
+ game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-6536.01953125, 139.52554321289, -181.90991210938)
+end)
+T:Button("IceCastle", function()
+ game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(5454.9140625, 339.49642944336, -6644.6420898438)
+end)
+T:Button("EnelSky", function()
+ game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-262.87954711914, 49354.61328125, -35264.8359375)
+end)
+T:Button("ForgottenIsland", function()
+ game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-3016.8891601563, 350.93392944336, -10080.818359375)
+end)
+    
+    local Misc = serv:Channel("Misc")
+    
+    Misc:Button("RedeemAllCode", function()
+        local args = {
+            [1] = "SUB2GAMERROBOT_EXP1"
+        }
+        
+        game:GetService("ReplicatedStorage").Remotes.Redeem:InvokeServer(unpack(args))
+        local args = {
+            [1] = "Sub2NoobMaster123"
+        }
+        
+        game:GetService("ReplicatedStorage").Remotes.Redeem:InvokeServer(unpack(args))
+        local args = {
+            [1] = "Sub2Daigrock "
+        }
+        
+        game:GetService("ReplicatedStorage").Remotes.Redeem:InvokeServer(unpack(args))
+        local args = {
+            [1] = "Axiore "
+        }
+        
+        game:GetService("ReplicatedStorage").Remotes.Redeem:InvokeServer(unpack(args))
+        local args = {
+            [1] = "TantaiGaming "
+        }
+        
+        game:GetService("ReplicatedStorage").Remotes.Redeem:InvokeServer(unpack(args))
+        local args = {
+            [1] = "StrawHatMaine "
+        }
+        
+        game:GetService("ReplicatedStorage").Remotes.Redeem:InvokeServer(unpack(args))
+        local args = {
+            [1] = "Sub2OfficialNoobie "
+        }
+        
+        game:GetService("ReplicatedStorage").Remotes.Redeem:InvokeServer(unpack(args))
+        local args = {
+            [1] = "Fudd10 "
+        }
+        
+        game:GetService("ReplicatedStorage").Remotes.Redeem:InvokeServer(unpack(args))
+        local args = {
+            [1] = "Bignews "
+        }
+        
+        game:GetService("ReplicatedStorage").Remotes.Redeem:InvokeServer(unpack(args))
+        local args = {
+            [1] = "TheGreatAce "
+        }
+        
+        game:GetService("ReplicatedStorage").Remotes.Redeem:InvokeServer(unpack(args))
+        end)
+    Misc:Seperator()
+        Misc:Button("RestatCode1", function()
+             local args = {
+        [1] = "Sub2UncleKizaru "
+    }
+    
+    game:GetService("ReplicatedStorage").Remotes.Redeem:InvokeServer(unpack(args))
+    end)
+    
+    Misc:Button("RestatCode2", function()
+        local args = {
+            [1] = "SUB2GAMERROBOT_RESET1 "
+        }
+        
+        game:GetService("ReplicatedStorage").Remotes.Redeem:InvokeServer(unpack(args))
+        end)
+    Misc:Seperator()
+        Misc:Button("OpenFruitsDealer", function()
+            
+    
+    local args = {
+        [1] = "GetFruits"
+    }
+    
+    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+    game.Players.localPlayer.PlayerGui.Main.FruitShop.Visible = true
+    
+    end)
+    
+    Misc:Button("OpenInventory", function()
+        local args = {
+            [1] = "getInventoryWeapons"
+        }
+        
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+        game.Players.localPlayer.PlayerGui.Main.Inventory.Visible = true
+        
+    end)
+    Misc:Button("OpenColorHaki", function()
+
+
+
+local args = {
+    [1] = "getColors"
+}
+
+game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+
+game.Players.localPlayer.PlayerGui.Main.Colors.Visible = true
+
+end)
+
+Misc:Button("OpenAwakeAbility", function()
+
+
+local args = {
+    [1] = "getAwakenedAbilities"
+}
+
+game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+
+
+
+end)
+Misc:Button("OpenTitle",function()
+			local args = {
+				[1] = "getTitles"
+			}
+			game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+			game.Players.localPlayer.PlayerGui.Main.Titles.Visible = true
+		end)
+    Misc:Seperator()
+        Misc:Button("FPSBoost", function()
+    
+            for _,v in pairs(workspace:GetDescendants()) do
+                if v.ClassName == "Part"
+                or v.ClassName == "SpawnLocation"
+                or v.ClassName == "WedgePart"
+                or v.ClassName == "Terrain"
+                or v.ClassName == "MeshPart" then
+                v.Material = "Plastic"
+                end
+                end
+        end)
+        Misc:Button("SeverHop", function()
+               local PlaceID = game.PlaceId
+                local AllIDs = {}
+                local foundAnything = ""
+                local actualHour = os.date("!*t").hour
+                local Deleted = false
+                function TPReturner()
+                    local Site;
+                    if foundAnything == "" then
+                        Site = game.HttpService:JSONDecode(game:HttpGet('https://games.roblox.com/v1/games/' .. PlaceID .. '/servers/Public?sortOrder=Asc&limit=100'))
+                    else
+                        Site = game.HttpService:JSONDecode(game:HttpGet('https://games.roblox.com/v1/games/' .. PlaceID .. '/servers/Public?sortOrder=Asc&limit=100&cursor=' .. foundAnything))
+                    end
+                    local ID = ""
+                    if Site.nextPageCursor and Site.nextPageCursor ~= "null" and Site.nextPageCursor ~= nil then
+                        foundAnything = Site.nextPageCursor
+                    end
+                    local num = 0;
+                    for i,v in pairs(Site.data) do
+                        local Possible = true
+                        ID = tostring(v.id)
+                        if tonumber(v.maxPlayers) > tonumber(v.playing) then
+                            for _,Existing in pairs(AllIDs) do
+                                if num ~= 0 then
+                                    if ID == tostring(Existing) then
+                                        Possible = false
+                                    end
+                                else
+                                    if tonumber(actualHour) ~= tonumber(Existing) then
+                                        local delFile = pcall(function()
+                                            -- delfile("NotSameServers.json")
+                                            AllIDs = {}
+                                            table.insert(AllIDs, actualHour)
+                                        end)
+                                    end
+                                end
+                                num = num + 1
+                            end
+                            if Possible == true then
+                                table.insert(AllIDs, ID)
+                                wait()
+                                pcall(function()
+                                    -- writefile("NotSameServers.json", game:GetService('HttpService'):JSONEncode(AllIDs))
+                                    wait()
+                                    game:GetService("TeleportService"):TeleportToPlaceInstance(PlaceID, ID, game.Players.LocalPlayer)
+                                end)
+                                wait(4)
+                            end
+                        end
+                    end
+                end
+                function Teleport() 
+                    while wait() do
+                        pcall(function()
+                            TPReturner()
+                            if foundAnything ~= "" then
+                                TPReturner()
+                            end
+                        end)
+                    end
+                end
+                Teleport()
+        end)
+         Misc:Seperator()
+        Misc:Toggle("CtrlclickTP",false,function(vu)
+			CTRL = vu
+        end)
+        NDGC = false
+		function NocooldownD()
+			if NDGC then
+				for i,v in next, getgc() do
+					if game.Players.LocalPlayer.Character.Dodge then
+						if typeof(v) == "function" and getfenv(v).script == game.Players.LocalPlayer.Character.Dodge then
+							for i2,v2 in next, getupvalues(v) do
+								if tostring(v2) == "0.4" then
+									repeat wait(.1)
+										setupvalue(v,i2,0)
+									until not NDGC
+								end
+							end
+						end
+					end
+				end
+			end
+		end
+        Misc:Toggle("DodgeNoCooldown",false,function(value)
+	 NDGC = value
+			NocooldownD()
+	 end)
+	 local Player = game:GetService'Players'.LocalPlayer
+		local NormalStamina = Player.Character.Energy.Value
+		function InfStamina()
+			Player.Character.Energy.Changed:connect(function()
+				if InfSS then
+					Player.Character.Energy.Value = NormalStamina
+				end 
+			end)
+		end
+		spawn(function()
+			while wait(.1) do
+				if InfSS then
+					wait(0.5)
+					NormalStamina = Player.Character.Energy.Value
+					InfStamina()
+				end
+			end
+		end)
+		Misc:Toggle("InfStamina",false,function(value)
+
+			InfSS = value
+			NormalStamina = Player.Character.Energy.Value
+
+		end)
+	 
+        local S = serv:Channel("Shop")          
+   
+    S:Label("FightingStyle")
+    S:Button("BlackLeg", function()
+        local args = {
+            [1] = "BuyBlackLeg"
+        }
+        
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+        end)
+                
+    S:Button("Electro", function()
+        local args = {
+            [1] = "BuyElectro"
+        }
+        
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+        end)
+    S:Button("FishmanKarate", function()
+        local args = {
+            [1] = "BuyFishmanKarate"
+        }
+        
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+    end)
+    
+    S:Button("SuperHuman", function()
+        
+local args = {
+    [1] = "BuySuperhuman"
+}
+
+game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+
+    end)
+    
+    S:Button("DragonClaw", function()
+        
+local args = {
+    [1] = "BlackbeardReward",
+    [2] = "DragonClaw",
+    [3] = "1"
+}
+
+game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+
+
+local args = {
+    [1] = "BlackbeardReward",
+    [2] = "DragonClaw",
+    [3] = "2"
+}
+
+game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+
+    end)
+    
+    S:Button("SharkmanKarate", function()
+        
+local args = {
+    [1] = "BuySharkmanKarate",
+    [2] = true
+}
+
+game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+
+
+local args = {
+    [1] = "BuySharkmanKarate"
+}
+
+game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+
+    end)
+    
+    S:Button("DeathStep", function()
+ local args = {
+    [1] = "BuyDeathStep"
+}
+
+game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+    end)
+    
+    S:Seperator()
+    S:Label("Ability")
+    S:Button("Geppo", function()
+        local args = {
+            [1] = "BuyHaki",
+            [2] = "Geppo"
+        }
+        
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+        end)
+    S:Button("BusoHaki", function()
+        local args = {
+            [1] = "BuyHaki",
+            [2] = "Buso"
+        }
+        
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+        end)
+        S:Button("Soru", function()
+            local args = {
+                [1] = "BuyHaki",
+                [2] = "Soru"
+            }
+            
+            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+        end)
+         
+        
+        
+        local R = serv:Channel("Raidยังไม่ได้ทำ")
+        
+
+		
+		R:Button("TeleportToLabroom",function()
+				game.Players.localPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-6438.73535, 250.645355, -4501.50684)
+end)
+R:Button("BuyRandomFruit",false,function(value)
+local args = {
+    [1] = "Cousin",
+    [2] = "Buy"
+}
+
+game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+end)
+
+PlayerName = {}
+		for i,v in pairs(game.Players:GetChildren()) do  
+			table.insert(PlayerName ,v.Name)
+		end
+		SelectedKillPlayer = ""
+		local Player = R:Dropdown("SelectedPlayer",PlayerName,function(plys)
+			SelectedKillPlayer = plys
+		end)
+		R:Toggle("KillPlayer",false,function(bool)
+			KillPlayer = bool
+			if KillPlayer == false then
+				game.Players:FindFirstChild(SelectedKillPlayer).Character.HumanoidRootPart.Size = Vector3.new(2, 2, 1)
+				local args = {
+					[1] = "Buso"
+				}
+				game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+			end
+			local args = {
+				[1] = "Buso"
+			}
+			game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+
+
+			while KillPlayer do wait()
+                sethiddenproperty(game.Players.LocalPlayer, "SimulationRadius", math.huge)
+				game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Players:FindFirstChild(SelectedKillPlayer).Character.HumanoidRootPart.CFrame * CFrame.new(0,-10,0)
+				game.Players:FindFirstChild(SelectedKillPlayer).Character.HumanoidRootPart.Size = Vector3.new(60,60,60)
+				game:GetService'VirtualUser':CaptureController()
+				game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
+			end
+		end)
+		
+
+		 end       
